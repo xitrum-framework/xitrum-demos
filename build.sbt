@@ -17,7 +17,7 @@ libraryDependencies += "org.jboss.netty" % "netty" % "4.0.0.Alpha1-SNAPSHOT" fro
 // Xitrum uses Jerkson: https://github.com/codahale/jerkson
 resolvers += "repo.codahale.com" at "http://repo.codahale.com"
 
-libraryDependencies += "tv.cntt" %% "xitrum" % "1.6"
+libraryDependencies += "tv.cntt" %% "xitrum" % "1.6.1"
 
 autoCompilerPlugins := true
 

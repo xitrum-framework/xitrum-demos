@@ -6,7 +6,7 @@ import xitrum.validation.{Required, Validated}
 import xitrum.view.DocType
 
 trait AppAction extends Action {
-  override def layout = DocType.xhtmlTransitional(
+  override def layout = DocType.html5(
     <html>
       <head>
         {antiCSRFMeta}
@@ -57,7 +57,7 @@ trait AppAction extends Action {
 
       <div id="chatOutput"></div>
 
-      <form postback="submit" action={urlForPostback[CometPublishAction]} after="function() { $('#chatInput').attr('value', '') }">
+      <form data-postback="submit" action={urlForPostback[CometPublishAction]} data-after="function() { $('#chatInput').attr('value', '') }">
         {<input type="hidden" name="channel" value="chat" /> :: Validated}
         {<input type="text" id="chatInput" name="chatInput" /> :: Required}
       </form>
