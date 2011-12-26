@@ -1,8 +1,6 @@
 package quickstart.action
 
 import xitrum.Action
-import xitrum.comet.CometPublishAction
-import xitrum.validation.{Required, Validated}
 import xitrum.view.DocType
 
 trait AppAction extends Action {
@@ -27,12 +25,16 @@ trait AppAction extends Action {
           <h1><a href={urlFor[IndexAction]}>Welcome to Xitrum</a></h1>
 
           <div class="grid_8">
+            <p>{sourceCodeLink}</p>
             <div id="flash">{jsFlash}</div>
             {renderedView}
           </div>
 
           <div class="grid_4">
-            {renderChat}
+            <h3>Samples</h3>
+            <ul>
+              <li><a href={urlFor[CometAction]}>Comet chat</a></li>
+            </ul>
           </div>
         </div>
         {jsAtBottom}
@@ -40,27 +42,11 @@ trait AppAction extends Action {
     </html>
   )
 
-  private def renderChat = {
-    jsCometGet("chat", """
-      function(channel, timestamp, body) {
-        var wasScrollAtBottom = xitrum.isScrollAtBottom('#chatOutput');
-
-        var escaped = $('<div/>').text(body.chatInput[0]).html();
-        $('#chatOutput').append('- ' + escaped + '<br />');
-
-        if (wasScrollAtBottom) xitrum.scrollToBottom('#chatOutput');
-      }
-    """)
-
-    <xml:group>
-      <h3>Chat</h3>
-
-      <div id="chatOutput"></div>
-
-      <form data-postback="submit" action={urlForPostback[CometPublishAction]} data-after="function() { $('#chatInput').attr('value', '') }">
-        {<input type="hidden" name="channel" value="chat" /> :: Validated}
-        {<input type="text" id="chatInput" name="chatInput" /> :: Required}
-      </form>
-    </xml:group>
+  private def sourceCodeLink = {
+    val fullClassName = getClass.getName
+    val className     = fullClassName.split("\\.").last
+    val desc          = "Source code of %s.scala".format(className)
+    val href          = "https://github.com/ngocdaothanh/xitrum-quickstart/tree/master/src/main/scala/" + fullClassName.replace(".", "/") + ".scala"
+    <a href={href}>{desc}</a>
   }
 }

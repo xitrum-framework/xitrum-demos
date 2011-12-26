@@ -1,3 +1,5 @@
+Quickstart samples for `Xitrum <https://github.com/ngocdaothanh/xitrum>`_.
+
 Install `SBT 0.11.2 <https://github.com/harrah/xsbt/wiki/Setup>`_, then:
 
 ::
