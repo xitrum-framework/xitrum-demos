@@ -31,3 +31,8 @@ unmanagedClasspath in Compile <+= (baseDirectory) map { bd => Attributed.blank(b
 
 // For "sbt run"
 unmanagedClasspath in Runtime <+= (baseDirectory) map { bd => Attributed.blank(bd / "config") }
+
+addCompilerPlugin("org.scala-lang.plugins" % "continuations" % "2.9.1")
+
+scalacOptions += "-P:continuations:enable"
+
