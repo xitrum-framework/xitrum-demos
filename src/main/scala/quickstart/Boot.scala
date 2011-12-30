@@ -1,10 +1,11 @@
 package quickstart
 
-import xitrum.Server
+import xitrum.handler.Server
+import xitrum.routing.Routes
 
 object Boot {
   def main(args: Array[String]) {
-    val server = new Server
-    server.start
+    Routes.fromCacheFileOrAnnotations()
+    Server.start()
   }
 }
