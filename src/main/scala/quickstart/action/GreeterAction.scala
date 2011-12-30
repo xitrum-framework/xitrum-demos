@@ -1,13 +1,11 @@
 package quickstart.action
 
 import scala.xml.NodeBuffer
-import xitrum.imperatively.ImperativelyXitrum
-import xitrum.imperatively.SessionHolder
 import xitrum.annotation.GET
+import xitrum.imperatively.{ImperativelyXitrum, SessionHolder}
 
 @GET("/greeter")
 class GreeterAction extends AppAction {
-
   val greeter = new Greeter
 
   override def execute {
@@ -18,7 +16,6 @@ class GreeterAction extends AppAction {
 }
 
 class Greeter extends ImperativelyXitrum {
-
   def workflow(): NodeBuffer @imp = {
     val (name, age) = getNameAndAge()
     val book = getBook()
@@ -31,10 +28,10 @@ class Greeter extends ImperativelyXitrum {
 
     var inputs: Map[String, String] = Map.empty
     var errors: Map[String, String] = Map.empty
-    
+
     var name: String = ""
     var age: String = ""
-   
+
     validateName(params) match {
       case Left(fields) => inputs = inputs ++ fields.inputs; errors = errors ++ fields.errors
       case Right(_name)  => name = _name
@@ -44,20 +41,20 @@ class Greeter extends ImperativelyXitrum {
       case Left(fields) => inputs = inputs ++ fields.inputs; errors = errors ++ fields.errors
       case Right(_age)  => age = _age
     }
-    
+
     if (inputs.size > 0) getNameAndAge(params ++ prompt(form(inputs, errors)))
     else (name, age)
   }
-  
+
   case class Fields(inputs: Map[String, String], errors: Map[String, String])
-  
+
   def validateName(params: Map[String, String] = Map.empty): Either[Fields, String] =
     params.get("Your name") match {
       case None                          => Left(Fields(Map("Your name" -> ""), Map.empty))
       case Some(str) if str.trim.isEmpty => Left(Fields(Map("Your name" -> ""), Map("Your name" -> "You must provide your name.")))
       case Some(name)                    => Right(name.trim)
     }
-  
+
   def validateAge(params: Map[String, String] = Map.empty): Either[Fields, String] =
     params.get("Your age") match {
       case None                                  => Left(Fields(Map("Your age" -> ""), Map.empty))

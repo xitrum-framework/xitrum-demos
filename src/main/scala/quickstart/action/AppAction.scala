@@ -36,6 +36,7 @@ trait AppAction extends Action {
               <li><a href={urlFor[CometAction]}>Comet chat</a></li>
               <li><a href={urlFor[BoringAction]}>Boring workflow</a></li>
               <li><a href={urlFor[GreeterAction]}>Greeter workflow</a></li>
+              <li><a href={urlFor[TodoAction]}>Todo list</a></li>
             </ul>
           </div>
         </div>

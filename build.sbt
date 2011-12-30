@@ -17,13 +17,13 @@ libraryDependencies += "io.netty" % "netty" % "4.0.0.Alpha1-SNAPSHOT" from "http
 // Xitrum uses Jerkson: https://github.com/codahale/jerkson
 resolvers += "repo.codahale.com" at "http://repo.codahale.com"
 
-libraryDependencies += "tv.cntt" %% "xitrum" % "1.7"
+//libraryDependencies += "tv.cntt" %% "xitrum" % "1.7"
 
 // If you want to try xitrum SNAPSHOT, comment the line above and uncomment
 // 2 following lines below
-//resolvers += ScalaToolsSnapshots
+resolvers += ScalaToolsSnapshots
 
-//libraryDependencies += "tv.cntt" %% "xitrum" % "1.8-SNAPSHOT"
+libraryDependencies += "tv.cntt" %% "xitrum" % "1.8-SNAPSHOT"
 
 autoCompilerPlugins := true
 

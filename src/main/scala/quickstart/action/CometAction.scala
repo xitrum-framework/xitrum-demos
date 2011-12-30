@@ -10,16 +10,13 @@ class CometAction extends AppAction {
     jsCometGet("chat", """
       function(channel, timestamp, body) {
         var wasScrollAtBottom = xitrum.isScrollAtBottom('#chatOutput');
-
-        var escaped = $('<div/>').text(body.chatInput[0]).html();
-        $('#chatOutput').append('- ' + escaped + '<br />');
-
+        $('#chatOutput').append('- ' + xitrum.escapeHtml(body.chatInput[0]) + '<br />');
         if (wasScrollAtBottom) xitrum.scrollToBottom('#chatOutput');
       }
     """)
 
     renderView(
-      <h2>Chat</h2>
+      <h1>Chat</h1>
       <div id="chatOutput"></div>
       <form data-postback="submit" action={urlForPostback[CometPublishAction]} data-after="function() { $('#chatInput').attr('value', '') }">
         {<input type="hidden" name="channel" value="chat" /> :: Validated}
