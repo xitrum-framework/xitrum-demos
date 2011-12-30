@@ -45,7 +45,8 @@
   "session": {
     // To store sessions on client side: xitrum.scope.session.CookieSessionStore
     // To store sessions on server side: xitrum.scope.session.HazelcastSessionStore
-    "store": "xitrum.scope.session.CookieSessionStore",
+    // "store": "xitrum.scope.session.CookieSessionStore",
+    "store": "xitrum.scope.session.HazelcastSessionStore",
 
     // If you run multiple sites on the same domain, make sure that there's no
     // cookie name conflict between sites
