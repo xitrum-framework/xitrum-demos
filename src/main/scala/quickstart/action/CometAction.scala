@@ -18,7 +18,7 @@ class CometAction extends AppAction {
     renderView(
       <h1>Chat</h1>
       <div id="chatOutput"></div>
-      <form data-postback="submit" action={urlForPostback[CometPublishAction]} data-after="function() { $('#chatInput').attr('value', '') }">
+      <form data-postback="submit" action={urlForPostback[CometPublishAction]} data-after="$('#chatInput').val('')">
         {<input type="hidden" name="channel" value="chat" /> :: Validated}
         {<input type="text" id="chatInput" name="chatInput" /> :: Required}
       </form>
