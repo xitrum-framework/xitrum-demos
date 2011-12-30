@@ -2,7 +2,7 @@ package quickstart.action
 
 import scala.xml.NodeBuffer
 import xitrum.annotation.GET
-import xitrum.imperatively.{ImperativelyXitrum, SessionHolder}
+import xitrum.imperatively.{Imperatively, SessionHolder}
 
 @GET("/boring")
 class BoringAction extends AppAction {
@@ -15,7 +15,7 @@ class BoringAction extends AppAction {
   }
 }
 
-class Boring extends ImperativelyXitrum {
+class Boring extends Imperatively {
   def workflow(): NodeBuffer @imp = {
     <h1>Boring</h1>
     <div>That was not very interesting.</div>

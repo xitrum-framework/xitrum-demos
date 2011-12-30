@@ -2,7 +2,7 @@ package quickstart.action
 
 import scala.xml.NodeBuffer
 import xitrum.annotation.GET
-import xitrum.imperatively.{ImperativelyXitrum, SessionHolder}
+import xitrum.imperatively.{Imperatively, SessionHolder}
 
 @GET("/greeter")
 class GreeterAction extends AppAction {
@@ -15,7 +15,7 @@ class GreeterAction extends AppAction {
   }
 }
 
-class Greeter extends ImperativelyXitrum {
+class Greeter extends Imperatively {
   def workflow(): NodeBuffer @imp = {
     val (name, age) = getNameAndAge()
     val book = getBook()
