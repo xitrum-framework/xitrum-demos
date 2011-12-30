@@ -19,6 +19,12 @@ resolvers += "repo.codahale.com" at "http://repo.codahale.com"
 
 libraryDependencies += "tv.cntt" %% "xitrum" % "1.7"
 
+// If you want to try xitrum SNAPSHOT, comment the line above and uncomment
+// 2 following lines below
+//resolvers += ScalaToolsSnapshots
+
+//libraryDependencies += "tv.cntt" %% "xitrum" % "1.8-SNAPSHOT"
+
 autoCompilerPlugins := true
 
 addCompilerPlugin("tv.cntt" %% "xitrum-xgettext" % "1.1")
