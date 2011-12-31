@@ -24,8 +24,9 @@ html
       .grid_8
         p
           != helper.asInstanceOf[AppAction].sourceCodeLink
-        #flash= jsFlash
-        != renderedView
+        #flash
+          !~ jsFlash
+        !~ renderedView
 
       .grid_4
         h3 Samples
