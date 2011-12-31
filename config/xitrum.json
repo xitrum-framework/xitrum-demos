@@ -35,6 +35,9 @@
     // "baseUri": "/my_site"
   // },
 
+  // Default Scalate template type, can be: jade, mustache, scaml, ssp
+  "scalate": "jade",
+
   // clusterMember, superClient, or javaClient
   // http://www.hazelcast.com/documentation.jsp#Clients
   //
