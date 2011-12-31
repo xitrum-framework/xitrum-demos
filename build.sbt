@@ -34,7 +34,7 @@ autoCompilerPlugins := true
 
 addCompilerPlugin("tv.cntt" %% "xitrum-xgettext" % "1.1")
 
-// xitrum.imperatively uses continuation, which is also a compiler plugin ------
+// xitrum.imperatively uses Scala continuation, also a compiler plugin ---------
 
 addCompilerPlugin("org.scala-lang.plugins" % "continuations" % "2.9.1")
 

@@ -34,10 +34,22 @@ html
           li
             a(href={urlFor[CometAction]}) Comet chat
           li
+            a(href={urlFor[TodoAction]}) Todo list
+
+        p Filters
+        ul
+          li
+            a(href={urlFor[BeforeFilterAction]}) Before filter
+          li
+            a(href={urlFor[AfterFilterAction]}) After filter
+          li
+            a(href={urlFor[AroundFilterAction]}) Around filter
+
+        p Imperatively
+        ul
+          li
             a(href={urlFor[BoringAction]}) Boring workflow
           li
             a(href={urlFor[GreeterAction]}) Greeter workflow
-          li
-            a(href={urlFor[TodoAction]}) Todo list
 
     = jsAtBottom
