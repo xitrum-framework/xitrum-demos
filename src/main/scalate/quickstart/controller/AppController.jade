@@ -1,4 +1,4 @@
-- import quickstart.action._
+- import quickstart.controller._
 
 !!! 5
 html
@@ -19,37 +19,23 @@ html
   body
     .container_12
       h1
-        a(href={urlFor[IndexAction]}) Welcome to Xitrum
+        a(href={Site.index.url}) Welcome to Xitrum
 
       .grid_8
         p
-          != helper.asInstanceOf[AppAction].sourceCodeLink
+          != helper.asInstanceOf[AppController].sourceCodeLink
         #flash
           !~ jsFlash
-        !~ renderedView
+        != renderedView
 
       .grid_4
         h3 Samples
         ul
           li
-            a(href={urlFor[CometAction]}) Comet chat
+            a(href={Articles.index.url}) REST
           li
-            a(href={urlFor[TodoAction]}) Todo list
-
-        p Filters
-        ul
+            a(href={CometChat.index.url}) Comet chat
           li
-            a(href={urlFor[BeforeFilterAction]}) Before filter
-          li
-            a(href={urlFor[AfterFilterAction]}) After filter
-          li
-            a(href={urlFor[AroundFilterAction]}) Around filter
-
-        p Imperatively
-        ul
-          li
-            a(href={urlFor[BoringAction]}) Boring workflow
-          li
-            a(href={urlFor[GreeterAction]}) Greeter workflow
+            a(href={Todos.index.url}) Todo list
 
     = jsAtBottom

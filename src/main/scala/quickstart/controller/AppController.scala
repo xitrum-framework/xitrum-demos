@@ -1,9 +1,9 @@
-package quickstart.action
+package quickstart.controller
 
-import xitrum.Action
+import xitrum.Controller
 
-trait AppAction extends Action {
-  override def layout = renderScalateTemplateToString(classOf[AppAction])
+trait AppController extends Controller {
+  override def layout = renderScalateTemplateToString(classOf[AppController])
 
   /** Used in layout */
   def sourceCodeLink = {

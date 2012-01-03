@@ -1,0 +1,46 @@
+- import quickstart.controller.{Todos, RVTodoList}
+
+h1 Todo list
+
+#todos(data-bind="template: {name: 'todo-template', foreach: todos}")
+
+form#new_todo_form
+  input#new_todo_desc(type="text" class="required")
+  input#new_todo_add(type="submit" value="Add")
+
+br
+input#save(type="button" value="Save")
+
+script#todo-template(type="text/html")
+  div
+    input(type="checkbox" data-bind="checked: done")
+    / ko if: done
+    strike
+      span(data-bind="text: desc")
+    / /ko
+    / ko ifnot: done
+    span(data-bind="text: desc")
+    / /ko
+
+-
+  koApplyBindingsCs(RVTodoList.get, Todos.save, """
+    $('#new_todo_form').submit ->
+      if $('#new_todo_form').valid()
+        desc = $('#new_todo_desc').val()
+        $('#new_todo_desc').val('')
+        todo = {done: false, desc: desc}
+        model.todos.push(ko.mapping.fromJS(todo))
+      false
+
+    $('#save').click(sync)
+  """)
+
+div
+  br
+  hr
+  p In this sample, the server side only has to work with Scala data structures:
+  pre<
+    code<
+      :~~escaped
+        case class Todo(done: Boolean, desc: String)
+        case class TodoList(todos: Seq[Todo])
