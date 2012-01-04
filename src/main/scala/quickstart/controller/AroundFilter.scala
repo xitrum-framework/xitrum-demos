@@ -1,0 +1,16 @@
+package quickstart.controller
+
+object AroundFilter extends AroundFilter
+
+class AroundFilter extends AppController {
+  aroundFilter { action =>
+    val begin = System.currentTimeMillis()
+    action()
+    val end   = System.currentTimeMillis()
+    logger.info("The action took " + (end - begin) + " [ms]")
+  }
+
+  val index = GET("around_filter") {
+    respondInlineView("Around filter should have been run, please check the log")
+  }
+}
