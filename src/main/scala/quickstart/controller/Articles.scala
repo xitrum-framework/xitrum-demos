@@ -36,9 +36,9 @@ class Articles extends AppController {
     val body  = param("body")
     val article = Article(title = title, body = body)
     if (article.isValid) {
-      Article.insert(article)
+      val id = Article.insert(article)
       flash("Article has been saved")
-      redirectTo(Articles.index)
+      redirectTo(show, "id" -> id)
     } else {
       RVArticle.set(article)
       flash("Title and body cannot be empty")
@@ -61,7 +61,7 @@ class Articles extends AppController {
     if (article.isValid) {
       Article.update(article)
       flash("Article has been saved")
-      redirectTo(Articles.index)
+      redirectTo(show, "id" -> id)
     } else {
       RVArticle.set(article)
       flash("Title and body cannot be empty")
@@ -82,15 +82,18 @@ case class Article(id: Int = 0, title: String = "", body: String = "") {
 }
 
 object Article {
-  val storage = ArrayBuffer(Article(1, "Title 1", "Body 1"), Article(2, "Title 2", "Body 2"))
+  val storage = ArrayBuffer[Article]()
+  insert(Article(1, "Title 1", "Body 1"))
+  insert(Article(2, "Title 2", "Body 2"))
 
   def findAll() = storage
 
   def find(id: Int) = storage(id - 1)
 
-  def insert(article: Article) = synchronized {
+  def insert(article: Article): Int = synchronized {
     val article2 = Article(storage.length + 1, article.title, article.body)
     storage.append(article2)
+    article2.id
   }
 
   def update(article: Article) = synchronized {
