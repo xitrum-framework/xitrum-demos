@@ -18,21 +18,21 @@ class Articles extends AppController {
   val index = GET() {
     val articles = Article.findAll()
     RVArticles.set(articles)
-    renderView()
+    respondView()
   }
 
   val show = GET(":id") {
     val id      = param[Int]("id")
     var article = Article.find(id)
     RVArticle.set(article)
-    renderView()
+    respondView()
   }
 
   // "first" for this route to have higher routing priority than "show" above
   val niw = first.GET("new") {
     val article = new Article()
     RVArticle.set(article)
-    renderView()
+    respondView()
   }
 
   val create = POST() {
@@ -46,7 +46,7 @@ class Articles extends AppController {
     } else {
       RVArticle.set(article)
       flash("Title and body cannot be empty")
-      renderView(niw)
+      respondView(niw)
     }
   }
 
@@ -54,7 +54,7 @@ class Articles extends AppController {
     val id      = param[Int]("id")
     var article = Article.find(id)
     RVArticle.set(article)
-    renderView()
+    respondView()
   }
 
   val update = PUT(":id") {
@@ -69,7 +69,7 @@ class Articles extends AppController {
     } else {
       RVArticle.set(article)
       flash("Title and body cannot be empty")
-      renderView(edit)
+      respondView(edit)
     }
   }
 

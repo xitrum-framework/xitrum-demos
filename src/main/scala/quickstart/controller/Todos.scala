@@ -15,7 +15,7 @@ class Todos extends AppController {
   val index = GET("todos") {
     val todoList = TodoList.get()
     RVTodoList.set(todoList)
-    renderView()
+    respondView()
   }
 
   val save = POST("todos") {

@@ -3,7 +3,7 @@ package quickstart.controller
 import xitrum.Controller
 
 trait AppController extends Controller {
-  override def layout = renderScalateTemplateToString(classOf[AppController])
+  override def layout = renderScalate(classOf[AppController])
 
   /** Used in layout */
   def sourceCodeLink = {

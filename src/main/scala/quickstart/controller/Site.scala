@@ -4,6 +4,6 @@ object Site extends Site
 
 class Site extends AppController {
   val index = GET() {
-    renderView()
+    respondView()
   }
 }

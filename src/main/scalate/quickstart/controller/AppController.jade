@@ -25,7 +25,7 @@ html
         p
           != helper.asInstanceOf[AppController].sourceCodeLink
         #flash
-          !~ jsFlash
+          !~ jsRenderFlash()
         != renderedView
 
       .grid_4
