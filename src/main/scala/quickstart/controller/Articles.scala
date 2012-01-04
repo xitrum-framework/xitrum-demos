@@ -42,9 +42,7 @@ class Articles extends AppController {
     } else {
       RVArticle.set(article)
       flash("Title and body cannot be empty")
-      // Must use companion object to render view of other action
-      // Cannot write: renderView(niw)
-      renderView(Articles.niw)
+      renderView(niw)
     }
   }
 
@@ -67,9 +65,7 @@ class Articles extends AppController {
     } else {
       RVArticle.set(article)
       flash("Title and body cannot be empty")
-      // Must use companion object to render view of other action
-      // Cannot write: renderView(edit)
-      renderView(Articles.edit)
+      renderView(edit)
     }
   }
 
