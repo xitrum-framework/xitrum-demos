@@ -3,27 +3,44 @@ package quickstart.controller
 import com.codahale.jerkson.Json
 import xitrum.RequestVar
 
-case class Todo(done: Boolean, desc: String)
-case class TodoList(todos: Seq[Todo])
+// Controller ------------------------------------------------------------------
 
+// Request var for passing data from action to Scalate view
 object RVTodoList extends RequestVar[TodoList]
 
+// For use in AppController.jade
 object Todos extends Todos
 
 class Todos extends AppController {
   val index = GET("todos") {
-    val todos = Seq(Todo(true, "Task1"), Todo(false, "Task2"))
-    RVTodoList.set(TodoList(todos))
+    val todoList = TodoList.get()
+    RVTodoList.set(todoList)
     renderView()
   }
 
   val save = POST("todos") {
-    val json      = param("model")
-    val todoList1 = Json.parse[TodoList](json)
-    val todos1    = todoList1.todos
+    val json     = param("model")
+    val todoList = Json.parse[TodoList](json)
+    TodoList.update(todoList)
+    jsRenderFlash("Todo list has been saved")
 
-    val todos2    = todos1.map { todo => Todo(!todo.done, todo.desc) }
-    val todoList2 = TodoList(todos2)
-    renderJson(todoList2)  // The model on the browser will be updated
+    // You can update the model on the browser like this:
+    // val newTodoList = ...
+    // renderJson(newTodoList)
+    //
+    // When the model on the browser is updated, Knockout.js will automagically
+    // update the UI!
   }
+}
+
+// Model -----------------------------------------------------------------------
+
+case class Todo(done: Boolean, desc: String)
+case class TodoList(todos: Seq[Todo])
+
+object TodoList {
+  private var storage = TodoList(Seq(Todo(true, "Task1"), Todo(false, "Task2")))
+
+  def get() = storage
+  def update(todoList: TodoList) { storage = todoList }
 }

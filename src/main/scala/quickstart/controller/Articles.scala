@@ -3,14 +3,13 @@ package quickstart.controller
 import scala.collection.mutable.ArrayBuffer
 import xitrum.RequestVar
 
-// Request vars for passing data from action to Scalate view -------------------
+// Controller ------------------------------------------------------------------
 
+// Request vars for passing data from action to Scalate view
 object RVArticle  extends RequestVar[Article]
 object RVArticles extends RequestVar[Seq[Article]]
 
-// Controller ------------------------------------------------------------------
-
-// For use at AppController.jade
+// For use in AppController.jade
 object Articles extends Articles
 
 class Articles extends AppController {
