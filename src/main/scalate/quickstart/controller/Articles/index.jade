@@ -1,1 +1,11 @@
-p index
+- import quickstart.controller.{Articles, RVArticles}
+
+h1 Articles
+
+ul
+  - for (article <- RVArticles.get)
+    li
+      a(href={Articles.show.url("id" -> article.id)})= article.title
+
+p
+  a(href={Articles.niw.url}) Create new

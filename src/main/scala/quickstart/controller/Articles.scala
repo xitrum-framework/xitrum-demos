@@ -1,36 +1,103 @@
 package quickstart.controller
 
+import scala.collection.mutable.ArrayBuffer
+import xitrum.RequestVar
+
+object RVArticle  extends RequestVar[Article]
+object RVArticles extends RequestVar[Seq[Article]]
+
 object Articles extends Articles
 
 class Articles extends AppController {
   pathPrefix = "articles"
 
   val index = GET() {
+    val articles = Article.findAll()
+    RVArticles.set(articles)
     renderView()
   }
 
   val show = GET(":id") {
+    val id = param[Int]("id")
+    var article = Article.find(id)
+    RVArticle.set(article)
     renderView()
   }
 
   // Set "first" for this route to have higher matching priority than "show" above
   val niw = first.GET("new") {
+    val article = new Article()
+    RVArticle.set(article)
     renderView()
   }
 
   val create = POST() {
-    renderView(niw)
+    val title = param("title")
+    val body  = param("body")
+    val article = Article(title = title, body = body)
+    if (article.isValid) {
+      Article.insert(article)
+      flash("Article has been saved")
+      redirectTo(Articles.index)
+    } else {
+      RVArticle.set(article)
+      flash("Title and body cannot be empty")
+      renderView(Articles.niw)
+    }
   }
 
   val edit = GET(":id/edit") {
+    val id = param[Int]("id")
+    var article = Article.find(id)
+    RVArticle.set(article)
     renderView()
   }
 
   val update = PUT(":id") {
-    renderView(edit)
+    val id      = param[Int]("id")
+    val title   = param("title")
+    val body    = param("body")
+    val article = Article(id, title, body)
+    if (article.isValid) {
+      Article.update(article)
+      flash("Article has been saved")
+      redirectTo(Articles.index)
+    } else {
+      RVArticle.set(article)
+      flash("Title and body cannot be empty")
+      renderView(Articles.edit)
+    }
   }
 
   val destroy = DELETE(":id") {
+    val id = param[Int]("id")
+    Article.delete(id)
+    flash("Article has been deleted")
     redirectTo(index)
+  }
+}
+
+case class Article(id: Int = 0, title: String = "", body: String = "") {
+  def isValid = !title.isEmpty && !body.isEmpty
+}
+
+object Article {
+  val storage = ArrayBuffer(Article(1, "Title 1", "Body 1"), Article(2, "Title 2", "Body 2"))
+
+  def findAll() = storage
+
+  def find(id: Int) = storage(id - 1)
+
+  def insert(article: Article) = synchronized {
+    val article2 = Article(storage.length + 1, article.title, article.body)
+    storage.append(article2)
+  }
+
+  def update(article: Article) = synchronized {
+    storage(article.id - 1) = article
+  }
+
+  def delete(id: Int) = synchronized {
+    storage.remove(id - 1)
   }
 }

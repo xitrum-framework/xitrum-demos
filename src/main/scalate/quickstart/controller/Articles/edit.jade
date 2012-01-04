@@ -1,2 +1,26 @@
-p edit
-= param("id")
+- import quickstart.controller.{Articles, RVArticle}
+- val article = RVArticle.get
+
+h1 Edit article
+
+form(action={Articles.update.url("id" -> article.id)} method="post")
+  != antiCSRFInput
+
+  input(type="hidden" name="_method" value="put")
+
+  label Title:
+  br
+  input(type="text" name="title" value={article.title})
+  br
+
+  label Body:
+  br
+  textarea(name="body" rows=20 cols=60)= article.body
+  br
+
+  p
+    input(type="submit" value="Save")
+
+p
+  a(href={Articles.show.url("id" -> article.id)}) Cancel |
+  a(href={Articles.index.url}) List of articles

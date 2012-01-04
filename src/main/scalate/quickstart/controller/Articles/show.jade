@@ -1,3 +1,12 @@
-p show
+- import quickstart.controller.{Articles, RVArticle}
+- val article = RVArticle.get
 
-= param("id")
+h1 Article
+
+h2= article.title
+
+p= article.body
+
+p
+  a(href={Articles.edit.url("id" -> article.id)}) Edit |
+  a(href={Articles.index.url}) List of articles
