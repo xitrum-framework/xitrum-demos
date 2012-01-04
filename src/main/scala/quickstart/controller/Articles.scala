@@ -15,7 +15,7 @@ object Articles extends Articles
 class Articles extends AppController {
   pathPrefix = "articles"
 
-  val index = GET() {
+  val index = GET {
     val articles = Article.findAll()
     RVArticles.set(articles)
     respondView()
@@ -35,7 +35,7 @@ class Articles extends AppController {
     respondView()
   }
 
-  val create = POST() {
+  val create = POST {
     val title   = param("title")
     val body    = param("body")
     val article = Article(title = title, body = body)
