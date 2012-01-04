@@ -3,9 +3,14 @@ package quickstart.controller
 import scala.collection.mutable.ArrayBuffer
 import xitrum.RequestVar
 
+// Request vars for passing data from action to Scalate view -------------------
+
 object RVArticle  extends RequestVar[Article]
 object RVArticles extends RequestVar[Seq[Article]]
 
+// Controller ------------------------------------------------------------------
+
+// For use at AppController.jade
 object Articles extends Articles
 
 class Articles extends AppController {
@@ -18,13 +23,13 @@ class Articles extends AppController {
   }
 
   val show = GET(":id") {
-    val id = param[Int]("id")
+    val id      = param[Int]("id")
     var article = Article.find(id)
     RVArticle.set(article)
     renderView()
   }
 
-  // Set "first" for this route to have higher matching priority than "show" above
+  // "first" for this route to have higher routing priority than "show" above
   val niw = first.GET("new") {
     val article = new Article()
     RVArticle.set(article)
@@ -32,8 +37,8 @@ class Articles extends AppController {
   }
 
   val create = POST() {
-    val title = param("title")
-    val body  = param("body")
+    val title   = param("title")
+    val body    = param("body")
     val article = Article(title = title, body = body)
     if (article.isValid) {
       val id = Article.insert(article)
@@ -47,7 +52,7 @@ class Articles extends AppController {
   }
 
   val edit = GET(":id/edit") {
-    val id = param[Int]("id")
+    val id      = param[Int]("id")
     var article = Article.find(id)
     RVArticle.set(article)
     renderView()
@@ -76,6 +81,8 @@ class Articles extends AppController {
     redirectTo(index)
   }
 }
+
+// Model -----------------------------------------------------------------------
 
 case class Article(id: Int = 0, title: String = "", body: String = "") {
   def isValid = !title.isEmpty && !body.isEmpty
