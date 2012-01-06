@@ -23,7 +23,7 @@ html
 
       .grid_8
         p
-          != helper.asInstanceOf[AppController].sourceCodeLink
+          != currentController.asInstanceOf[AppController].sourceCodeLink
         #flash
           !~ jsRenderFlash()
         != renderedView
