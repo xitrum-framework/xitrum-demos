@@ -9,7 +9,7 @@ class BeforeFilter extends AppController {
   }
 
   // This method is run after the above filters
-  val index = GET("before_filter") {
+  val index = GET("filter/before") {
     respondInlineView("Before filters should have been run, please check the log")
   }
 }

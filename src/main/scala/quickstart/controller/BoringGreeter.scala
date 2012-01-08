@@ -3,9 +3,9 @@ package quickstart.controller
 import scala.xml.NodeBuffer
 import xitrum.imperatively.{Imperatively, SessionHolder}
 
-object BoringGreeterController extends BoringGreeterController
+object BoringGreeter extends BoringGreeter
 
-class BoringGreeterController extends AppController {
+class BoringGreeter extends AppController {
   val boring = GET("boring") {
     SessionHolder.set(session)
     val params: Map[String, String] = textParams.filterNot(x => x._2.isEmpty).map(x => (x._1, x._2.head)).toMap
