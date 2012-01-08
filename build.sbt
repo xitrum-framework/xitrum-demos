@@ -1,3 +1,5 @@
+import com.mojolly.scalate.ScalatePlugin._
+
 organization := "tv.cntt"
 
 name         := "xitrum-quickstart"
@@ -39,6 +41,14 @@ addCompilerPlugin("tv.cntt" %% "xitrum-xgettext" % "1.1")
 addCompilerPlugin("org.scala-lang.plugins" % "continuations" % "2.9.1")
 
 scalacOptions += "-P:continuations:enable"
+
+// Precompile Scalate ----------------------------------------------------------
+
+seq(scalateSettings:_*)
+
+scalateTemplateDirectory in Compile <<= (baseDirectory) { _ / "src/main/view" }
+
+scalateBindings += Binding("helper", "xitrum.Controller", true)
 
 // Put config directory in classpath for easier development --------------------
 
