@@ -2,6 +2,7 @@ package quickstart.controller
 
 import scala.collection.mutable.ArrayBuffer
 import xitrum.RequestVar
+import xitrum.validator.Required
 
 // Controller ------------------------------------------------------------------
 
@@ -39,14 +40,15 @@ class Articles extends AppController {
     val title   = param("title")
     val body    = param("body")
     val article = Article(title = title, body = body)
-    if (article.isValid) {
-      val id = Article.insert(article)
-      flash("Article has been saved")
-      redirectTo(show, "id" -> id)
-    } else {
-      RVArticle.set(article)
-      flash("Title and body cannot be empty")
-      respondView(niw)
+    article.v match {
+      case None =>
+        val id = Article.insert(article)
+        flash("Article has been saved")
+        redirectTo(show, "id" -> id)
+      case Some(msg) =>
+        RVArticle.set(article)
+        flash(msg)
+        respondView(niw)
     }
   }
 
@@ -62,14 +64,15 @@ class Articles extends AppController {
     val title   = param("title")
     val body    = param("body")
     val article = Article(id, title, body)
-    if (article.isValid) {
-      Article.update(article)
-      flash("Article has been saved")
-      redirectTo(show, "id" -> id)
-    } else {
-      RVArticle.set(article)
-      flash("Title and body cannot be empty")
-      respondView(edit)
+    article.v match {
+      case None =>
+        Article.update(article)
+        flash("Article has been saved")
+        redirectTo(show, "id" -> id)
+      case Some(msg) =>
+        RVArticle.set(article)
+        flash(msg)
+        respondView(edit)
     }
   }
 
@@ -84,7 +87,9 @@ class Articles extends AppController {
 // Model -----------------------------------------------------------------------
 
 case class Article(id: Int = 0, title: String = "", body: String = "") {
-  def isValid = !title.isEmpty && !body.isEmpty
+  def v =
+    Required.v("Title", title) orElse
+    Required.v("Body",  body)
 }
 
 object Article {
