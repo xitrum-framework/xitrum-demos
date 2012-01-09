@@ -6,14 +6,14 @@ import xitrum.imperatively.{Imperatively, SessionHolder}
 object BoringGreeter extends BoringGreeter
 
 class BoringGreeter extends AppController {
-  val boring = GET("boring") {
+  def boring = GET("boring") {
     SessionHolder.set(session)
     val params: Map[String, String] = textParams.filterNot(x => x._2.isEmpty).map(x => (x._1, x._2.head)).toMap
     val iboring = new ImperativelyBoring
     respondInlineView(iboring.nextStep(params))
   }
 
-  val greeter = GET("greeter") {
+  def greeter = GET("greeter") {
     SessionHolder.set(session)
     val params: Map[String, String] = textParams.filterNot(x => x._2.isEmpty).map(x => (x._1, x._2.head)).toMap
     val igreeter = new ImperativelyGreeter

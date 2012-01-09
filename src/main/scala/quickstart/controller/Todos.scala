@@ -12,13 +12,13 @@ object RVTodoList extends RequestVar[TodoList]
 object Todos extends Todos
 
 class Todos extends AppController {
-  val index = GET("todos") {
+  def index = GET("todos") {
     val todoList = TodoList.get()
     RVTodoList.set(todoList)
     respondView()
   }
 
-  val save = POST("todos") {
+  def save = POST("todos") {
     val json     = param("model")
     val todoList = Json.parse[TodoList](json)
     TodoList.update(todoList)

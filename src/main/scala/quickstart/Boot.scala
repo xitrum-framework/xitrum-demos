@@ -8,8 +8,7 @@ import quickstart.controller.Errors
 object Boot {
   def main(args: Array[String]) {
     Routes.fromCacheFileOrRecollect()
-    Routes.error404 = Errors.error404
-    Routes.error500 = Errors.error500
+    Routes.error = classOf[Errors]
     Server.start()
   }
 }

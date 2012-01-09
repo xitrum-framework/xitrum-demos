@@ -1,13 +1,13 @@
 package quickstart.controller
 
-object Errors extends Errors
+import xitrum.ErrorController
 
-class Errors extends AppController {
-  val error404 = indirectAction {
+class Errors extends AppController with ErrorController {
+  def error404 = errorAction {
     respondInlineView("This is custom 404 page")
   }
 
-  val error500 = indirectAction {
+  def error500 = errorAction {
     respondInlineView("This is custom 500 page")
   }
 }

@@ -10,7 +10,7 @@ class AroundFilter extends AppController {
     logger.info("The action took " + (end - begin) + " [ms]")
   }
 
-  val index = GET("filter/around") {
+  def index = GET("filter/around") {
     respondInlineView("Around filter should have been run, please check the log")
   }
 }

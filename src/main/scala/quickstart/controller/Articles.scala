@@ -16,13 +16,13 @@ object Articles extends Articles
 class Articles extends AppController {
   pathPrefix = "articles"
 
-  val index = GET {
+  def index = GET {
     val articles = Article.findAll()
     RVArticles.set(articles)
     respondView()
   }
 
-  val show = GET(":id") {
+  def show = GET(":id") {
     val id      = param[Int]("id")
     var article = Article.find(id)
     RVArticle.set(article)
@@ -30,13 +30,13 @@ class Articles extends AppController {
   }
 
   // "first" for this route to have higher routing priority than "show" above
-  val niw = first.GET("new") {
+  def niw = first.GET("new") {
     val article = new Article()
     RVArticle.set(article)
     respondView()
   }
 
-  val create = POST {
+  def create = POST {
     val title   = param("title")
     val body    = param("body")
     val article = Article(title = title, body = body)
@@ -52,14 +52,14 @@ class Articles extends AppController {
     }
   }
 
-  val edit = GET(":id/edit") {
+  def edit = GET(":id/edit") {
     val id      = param[Int]("id")
     var article = Article.find(id)
     RVArticle.set(article)
     respondView()
   }
 
-  val update = PUT(":id") {
+  def update = PUT(":id") {
     val id      = param[Int]("id")
     val title   = param("title")
     val body    = param("body")
@@ -76,7 +76,7 @@ class Articles extends AppController {
     }
   }
 
-  val destroy = DELETE(":id") {
+  def destroy = DELETE(":id") {
     val id = param[Int]("id")
     Article.delete(id)
     flash("Article has been deleted")
