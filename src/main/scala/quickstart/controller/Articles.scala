@@ -87,6 +87,7 @@ class Articles extends AppController {
 // Model -----------------------------------------------------------------------
 
 case class Article(id: Int = 0, title: String = "", body: String = "") {
+  // Returns Some(error message) or None
   def v =
     Required.v("Title", title) orElse
     Required.v("Body",  body)
