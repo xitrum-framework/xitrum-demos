@@ -7,7 +7,6 @@ import quickstart.controller.Errors
 
 object Boot {
   def main(args: Array[String]) {
-    Routes.fromCacheFileOrRecollect()
     Routes.error = classOf[Errors]
     Server.start()
   }
