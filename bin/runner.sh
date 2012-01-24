@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # You may need to customize memory config below to optimize for your environment
-JAVA_OPTS='-Xms512m -Xmx1024m -XX:MaxPermSize=128m -server -Djava.awt.headless=true -Dxitrum.mode=production'
+JAVA_OPTS='-server -Xms256m -Xmx1024m -XX:MaxPermSize=128m -XX:+UseParallelGC -Djava.awt.headless=true -Dxitrum.mode=production'
 
 # Quote because path may contain spaces
 if [ -h $0 ]
@@ -17,7 +17,7 @@ cd "$ROOT_DIR"
 #
 # Include ROOT_DIR to do "ps aux | grep java" to get pid easier when
 # starting multiple processes from different directories
-CLASS_PATH="$ROOT_DIR/lib/slf4j-api-1.6.4.jar:$ROOT_DIR/lib/*:config"
+CLASS_PATH="$ROOT_DIR/lib/slf4j-api-1.6.4.jar:lib/*:config"
 
 # Use exec to be compatible with daemontools:
 # http://cr.yp.to/daemontools.html
