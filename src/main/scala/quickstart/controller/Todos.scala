@@ -24,11 +24,11 @@ class Todos extends AppController {
     TodoList.update(todoList)
     jsRespondFlash("Todo list has been saved")
 
-    // You can update the model on the browser like this:
+    // From here, you can update the model on the browser like this:
     // val newTodoList = ...
     // respondJson(newTodoList)
     //
-    // When the model on the browser is updated, Knockout.js will automagically
+    // Whenever the model on the browser is updated, Knockout.js will automagically
     // update the UI!
   }
 }
