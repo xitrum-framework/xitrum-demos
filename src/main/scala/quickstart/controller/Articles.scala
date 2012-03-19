@@ -22,7 +22,7 @@ class Articles extends AppController {
     respondView()
   }
 
-  def show = GET(":id") {
+  def show = GET(":id<[0-9]+>") {
     val id      = param[Int]("id")
     var article = Article.find(id)
     RVArticle.set(article)
