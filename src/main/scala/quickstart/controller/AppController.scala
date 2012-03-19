@@ -10,7 +10,7 @@ trait AppController extends Controller {
     val fullClassName = getClass.getName
     val className     = fullClassName.split("\\.").last
     val desc          = "Source code of %s.scala".format(className)
-    val href          = "https://github.com/ngocdaothanh/xitrum-quickstart/tree/master/src/main/scala/" + fullClassName.replace(".", "/") + ".scala"
+    val href          = "https://github.com/ngocdaothanh/xitrum-demos/tree/master/src/main/scala/" + fullClassName.replace(".", "/") + ".scala"
     <a href={href}>{desc}</a>
   }
 }
