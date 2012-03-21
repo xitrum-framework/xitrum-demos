@@ -4,14 +4,13 @@ h1 Comet chat
 
 #chatOutput
 
-form(data-postback="submit" action={CometController.publish.url("channel" -> "chat")} data-after="$('#chatInput').val('')")
+form(data-postback="submit" action={CometController.publish.url("topic" -> "chat")} data-after="$('#chatInput').val('')")
   input(type="text" id="chatInput" name="chatInput" class="required")
 
 -
   jsCometGet("chat", """
-    function(channel, timestamp, body) {
-      var wasScrollAtBottom = xitrum.isScrollAtBottom('#chatOutput');
-      $('#chatOutput').append('- ' + xitrum.escapeHtml(body.chatInput[0]) + '<br />');
-      if (wasScrollAtBottom) xitrum.scrollToBottom('#chatOutput');
+    function(topic, timestamp, body) {
+      var text = '- ' + xitrum.escapeHtml(body.chatInput[0]) + '<br />';
+      xitrum.appendAndScroll('#chatOutput', text);
     }
   """)

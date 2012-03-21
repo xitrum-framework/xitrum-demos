@@ -16,6 +16,8 @@ html
     link(type="text/css" rel="stylesheet" media="all" href={urlForPublic("css/960/960.css")})
     link(type="text/css" rel="stylesheet" media="all" href={urlForPublic("css/app.css")})
 
+    = jsDefaults
+
   body
     .container_12
       h1
@@ -37,6 +39,8 @@ html
           li
             a(href={CometChat.index.url}) Comet chat
           li
+            a(href={WebSocketChat.index.url}) WebSocket chat
+          li
             a(href={Todos.index.url}) Todo list
 
         p Filters
@@ -55,4 +59,4 @@ html
           li
             a(href={BoringGreeter.greeter.url}) Greeter
 
-    = jsAtBottom
+    = jsForView

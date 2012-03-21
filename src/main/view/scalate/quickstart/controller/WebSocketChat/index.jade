@@ -1,0 +1,46 @@
+- import xitrum.comet.CometController
+
+h1 WebSocket chat
+
+#chatOutput
+input(type="text" id="chatInput" name="chatInput" class="required" disabled="disabled")
+
+:javascript
+  var socket;
+  var initSocket = function() {
+    if (!window.WebSocket) window.WebSocket = window.MozWebSocket;
+    if (!window.WebSocket) {
+      alert("Your browser does not support WebSocket.");
+    } else {
+      socket = new WebSocket('ws://localhost:8000/websocket_chat');
+
+      socket.onopen = function(event) {
+        var text = '<b>[Connected]</b><br />';
+        xitrum.appendAndScroll('#chatOutput', text);
+        $('#chatInput').removeAttr('disabled');
+      };
+
+      socket.onclose = function(event) {
+        var text = '<b>[Disconnected]</b><br />';
+        xitrum.appendAndScroll('#chatOutput', text);
+        $('#chatInput').attr('disabled', 'disabled');
+
+        // Reconnect
+        setTimeout(initSocket, 3000);
+      };
+
+      $('#chatInput').keypress(function(event) {
+        var keycode = (event.keyCode ? event.keyCode : event.which);
+        if (keycode == '13') {
+          socket.send($('#chatInput').val());
+          $('#chatInput').val('');
+        }
+      });
+
+      socket.onmessage = function(event) {
+        var text = '- ' + xitrum.escapeHtml(event.data) + '<br />';
+        xitrum.appendAndScroll('#chatOutput', text);
+      };
+    }
+  };
+  initSocket();
