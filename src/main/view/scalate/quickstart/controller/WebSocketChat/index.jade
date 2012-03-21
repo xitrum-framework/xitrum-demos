@@ -1,9 +1,12 @@
-- import xitrum.comet.CometController
+- import quickstart.controller.WebSocketChat
 
 h1 WebSocket chat
 
 #chatOutput
 input(type="text" id="chatInput" name="chatInput" class="required" disabled="disabled")
+
+script
+  = "var url = '" + WebSocketChat.webSocketEntry.webSocketAbsoluteUrl + "';"
 
 :javascript
   var socket;
@@ -12,7 +15,7 @@ input(type="text" id="chatInput" name="chatInput" class="required" disabled="dis
     if (!window.WebSocket) {
       alert("Your browser does not support WebSocket.");
     } else {
-      socket = new WebSocket('ws://localhost:8000/websocket_chat');
+      socket = new WebSocket(url);
 
       socket.onopen = function(event) {
         var text = '<b>[Connected]</b><br />';
