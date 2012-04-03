@@ -1,4 +1,4 @@
-package quickstart.controller
+package demos.controller
 
 import scala.xml.NodeBuffer
 import xitrum.imperatively.{Imperatively, SessionHolder}

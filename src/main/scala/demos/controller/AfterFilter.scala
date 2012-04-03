@@ -1,4 +1,4 @@
-package quickstart.controller
+package demos.controller
 
 object AfterFilter extends AfterFilter
 

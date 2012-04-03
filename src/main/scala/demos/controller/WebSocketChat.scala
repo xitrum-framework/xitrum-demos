@@ -1,4 +1,4 @@
-package quickstart.controller
+package demos.controller
 
 import scala.collection.mutable.ListBuffer
 import xitrum.comet.{Comet, CometMessage}

@@ -1,4 +1,4 @@
-package quickstart.controller
+package demos.controller
 
 import com.codahale.jerkson.Json
 import xitrum.RequestVar

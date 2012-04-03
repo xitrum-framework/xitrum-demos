@@ -1,9 +1,9 @@
-package quickstart
+package demos
 
 import xitrum.handler.Server
 import xitrum.routing.Routes
 
-import quickstart.controller.Errors
+import demos.controller.Errors
 
 object Boot {
   def main(args: Array[String]) {
