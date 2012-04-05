@@ -3,7 +3,7 @@ import com.mojolly.scalate.ScalatePlugin._
 
 organization := "tv.cntt"
 
-name         := "xitrum-quickstart"
+name         := "xitrum-demos"
 
 version      := "1.0-SNAPSHOT"
 
