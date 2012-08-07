@@ -1,9 +1,9 @@
 {
   // Protect the whole site with basic authentication
   // "globalBasicAuthentication": {
-    // "realm":    "hiiikari.tv",
-    // "username": "d91b5f986e8997bf7316d2d7ddc5b88c",
-    // "password": "3153cd8f2a3d8618153d68c4fcd05b58"
+    // "realm":    "xitrum",
+    // "username": "xitrum",
+    // "password": "xitrum"
   // },
 
   // Comment out if you don't want to start HTTP server
