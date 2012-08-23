@@ -3,8 +3,8 @@
 !!! 5
 html
   head
-    = antiCSRFMeta
-    = xitrumCSS
+    != antiCSRFMeta
+    != xitrumCSS
 
     meta(content="text/html; charset=utf-8" http-equiv="content-type")
     title Welcome to Xitrum
@@ -16,7 +16,7 @@ html
     link(type="text/css" rel="stylesheet" media="all" href={urlForPublic("css/960/960.css")})
     link(type="text/css" rel="stylesheet" media="all" href={urlForPublic("css/app.css")})
 
-    = jsDefaults
+    != jsDefaults
 
   body
     .container_12
@@ -59,4 +59,4 @@ html
           li
             a(href={BoringGreeter.greeter.url}) Greeter
 
-    = jsForView
+    != jsForView
