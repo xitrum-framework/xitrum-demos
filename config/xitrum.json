@@ -10,8 +10,8 @@
   // Comment out the one you don't want to start
   "port": {
     "http":              8000,
-    "https":             4430,
-    "flashSocketPolicy": 8430  // If enabled, flash_socket_policy.xml will be returned
+    "https":             4430//,
+    //"flashSocketPolicy": 8430  // If enabled, flash_socket_policy.xml will be returned
   },
 
   // Not used if port.https above is disabled.
