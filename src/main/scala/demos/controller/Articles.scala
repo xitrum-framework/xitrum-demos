@@ -30,7 +30,7 @@ class Articles extends AppController {
   }
 
   // "first" for this route to have higher routing priority than "show" above
-  def niw = first.GET("new") {
+  def nevv = first.GET("new") {
     val article = new Article()
     RVArticle.set(article)
     respondView()
@@ -48,7 +48,7 @@ class Articles extends AppController {
       case Some(msg) =>
         RVArticle.set(article)
         flash(msg)
-        respondView(niw)
+        respondView(nevv)
     }
   }
 
