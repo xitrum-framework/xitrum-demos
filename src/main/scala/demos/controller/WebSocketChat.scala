@@ -1,8 +1,7 @@
 package demos.controller
 
-import scala.collection.mutable.ListBuffer
-import xitrum.comet.{Comet, CometMessage}
-import xitrum.scope.request.Params
+import scala.collection.mutable.{Map => MMap}
+import xitrum.sockjs.{MessageQueue, QueueMessage}
 
 object WebSocketChat extends WebSocketChat
 
@@ -15,26 +14,26 @@ class WebSocketChat extends AppController {
 
   def webSocketEntry = WEBSOCKET("websocket_chat") {
     acceptWebSocket(new WebSocketHandler() {
-      val listener = (messages: Seq[CometMessage]) => {
+      private val listener = (messages: Seq[QueueMessage]) => {
         messages.foreach { message =>
-          respondWebSocket(message.body("chatInput").head)
+          respondWebSocket(message.body)
         }
 
         // Return false for Comet not to automatically unsubscribe this listener.
-        // With WebSocket the response can be sent many times.
+        // With WebSocket respondWebSocket can be called to send WebSocket frames many times.
         false
       }
 
       def onOpen() {
-        Comet.subscribe(TOPIC, listener, 0)
+        MessageQueue.subscribe(TOPIC, listener, 0)
       }
 
-      def onMessage(text: String) {
-        Comet.publish(TOPIC, scala.collection.mutable.Map("chatInput" -> List(text)))
+      def onMessage(message: String) {
+        MessageQueue.publish(TOPIC, message)
       }
 
       def onClose() {
-        Comet.unsubscribe(TOPIC, listener)
+        MessageQueue.unsubscribe(TOPIC, listener)
       }
     })
   }

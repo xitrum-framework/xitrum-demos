@@ -10,6 +10,16 @@ script
 
 :javascript
   var socket;
+
+  // Do not put in initSocket so that this event handler is registered only once
+  $('#chatInput').keypress(function(event) {
+    var keycode = (event.keyCode ? event.keyCode : event.which);
+    if (keycode == '13') {
+      socket.send($('#chatInput').val());
+      $('#chatInput').val('');
+    }
+  });
+
   var initSocket = function() {
     if (!window.WebSocket) window.WebSocket = window.MozWebSocket;
     if (!window.WebSocket) {
@@ -29,16 +39,8 @@ script
         $('#chatInput').attr('disabled', 'disabled');
 
         // Reconnect
-        setTimeout(initSocket, 3000);
+        setTimeout(initSocket, 5000);
       };
-
-      $('#chatInput').keypress(function(event) {
-        var keycode = (event.keyCode ? event.keyCode : event.which);
-        if (keycode == '13') {
-          socket.send($('#chatInput').val());
-          $('#chatInput').val('');
-        }
-      });
 
       socket.onmessage = function(event) {
         var text = '- ' + xitrum.escapeHtml(event.data) + '<br />';
