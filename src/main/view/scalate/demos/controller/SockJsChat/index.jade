@@ -33,7 +33,7 @@ script
       $('#chatInput').attr('disabled', 'disabled');
 
       // Reconnect
-      setTimeout(initSocket, 5000);
+      setTimeout(initSocket, 1000);
     };
 
     socket.onmessage = function(event) {

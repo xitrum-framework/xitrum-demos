@@ -1,7 +1,7 @@
 package demos.controller
 
 import scala.collection.mutable.{Map => MMap}
-import xitrum.{Controller, SockJsHandler}
+import xitrum.SockJsHandler
 import xitrum.sockjs.{MessageQueue, QueueMessage}
 
 class SockJsChatHandler extends SockJsHandler {
@@ -17,7 +17,7 @@ class SockJsChatHandler extends SockJsHandler {
     false
   }
 
-  def onOpen(controller: Controller) {
+  def onOpen() {
     MessageQueue.subscribe(TOPIC, listener, 0)
   }
 
