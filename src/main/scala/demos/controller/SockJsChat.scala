@@ -13,7 +13,7 @@ class SockJsChatHandler extends SockJsHandler {
       send(message.body)
     }
 
-    // Return false for Comet not to automatically unsubscribe this listener.
+    // Return false for MessageQueue not to automatically unsubscribe this listener.
     // With SockJS sendMessage can be called to send SockJS frames many times.
     false
   }

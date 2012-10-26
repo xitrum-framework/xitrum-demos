@@ -19,7 +19,7 @@ class WebSocketChat extends AppController {
           respondWebSocket(message.body)
         }
 
-        // Return false for Comet not to automatically unsubscribe this listener.
+        // Return false for MessageQueue not to automatically unsubscribe this listener.
         // With WebSocket respondWebSocket can be called to send WebSocket frames many times.
         false
       }
