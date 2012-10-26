@@ -1,10 +1,12 @@
+- import demos.controller.SockJsChatHandler
+
 h1 SockJS chat
 
 #chatOutput
 input(type="text" id="chatInput" name="chatInput" class="required" disabled="disabled")
 
 script
-  = "var url = '" + "sockjs_chat_handler" + "';"
+  = "var url = '" + SockJsChatHandler.url + "';"
 
 :javascript
   var socket;

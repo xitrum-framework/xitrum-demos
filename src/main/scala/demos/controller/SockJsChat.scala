@@ -4,12 +4,13 @@ import scala.collection.mutable.{Map => MMap}
 import xitrum.SockJsHandler
 import xitrum.sockjs.{MessageQueue, QueueMessage}
 
+object SockJsChatHandler extends SockJsChatHandler
 class SockJsChatHandler extends SockJsHandler {
   private val TOPIC = "chat"
 
   private val listener = (messages: Seq[QueueMessage]) => {
     messages.foreach { message =>
-      sendMessage(message.body)
+      send(message.body)
     }
 
     // Return false for Comet not to automatically unsubscribe this listener.
@@ -31,7 +32,6 @@ class SockJsChatHandler extends SockJsHandler {
 }
 
 object SockJsChat extends SockJsChat
-
 class SockJsChat extends AppController {
   def index = GET("sockjs_chat") {
     respondView()
