@@ -18,6 +18,8 @@ scalacOptions ++= Seq(
 // and it takes several hours to sync from Sonatype to Maven Central
 resolvers += "SonatypeReleases" at "http://oss.sonatype.org/content/repositories/releases/"
 
+resolvers += "SonatypeSnapshots" at "http://oss.sonatype.org/content/repositories/snapshots/"
+
 libraryDependencies += "tv.cntt" %% "xitrum" % "1.9.11-SNAPSHOT"
 
 // Xitrum uses Akka
