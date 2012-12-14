@@ -44,10 +44,8 @@
   // Default Scalate template type, can be: jade, mustache, scaml, ssp
   "scalate": "jade",
 
-  // clusterMember, superClient, or javaClient
-  // http://www.hazelcast.com/documentation.jsp#Clients
-  //
-  // For clusterMember or superClient mode, see hazelcast_cluster_member_or_super_client.xml
+  // clusterMember, liteMember, or javaClient
+  // For clusterMember or liteMember mode, see hazelcast_cluster_member_or_super_client.xml
   // For javaClient mode, see hazelcast_java_client.json
   "hazelcastMode": "clusterMember",
 
