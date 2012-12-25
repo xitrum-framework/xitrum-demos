@@ -35,11 +35,16 @@ html
 
         ul
           li
-            a(href={Site.mustache.url}) Mustache template
-          li
             a(href={Articles.index.url}) REST
           li
             a(href={Todos.index.url}) Knockout.js
+
+        p Scalate
+        ul
+          li
+            a(href={ScalateController.fromDB.url}) Template from DB
+          li
+            a(href={ScalateController.mustache.url}) Mustache template
 
         p Async
         ul
@@ -53,7 +58,7 @@ html
           li
             a(href={BeforeFilter.index.url}) Before filter
           li
-            a(href={AfterFilter.index.url}) After filter
+            a(href={AfterFilterController.index.url}) After filter
           li
             a(href={AroundFilter.index.url}) Around filter
 

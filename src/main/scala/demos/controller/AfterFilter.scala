@@ -1,8 +1,8 @@
 package demos.controller
 
-object AfterFilter extends AfterFilter
+object AfterFilterController extends AfterFilterController
 
-class AfterFilter extends AppController {
+class AfterFilterController extends AppController {
   def index = GET("filter/after") {
     respondInlineView("After filter should have been run, please check the log")
   }

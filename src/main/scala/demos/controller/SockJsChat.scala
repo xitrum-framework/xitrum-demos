@@ -32,6 +32,7 @@ class SockJsChatHandler extends SockJsHandler {
 }
 
 object SockJsChat extends SockJsChat
+
 class SockJsChat extends AppController {
   def index = GET("sockjs_chat") {
     respondView()
