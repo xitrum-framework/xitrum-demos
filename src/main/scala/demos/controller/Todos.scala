@@ -1,7 +1,7 @@
 package demos.controller
 
-import com.codahale.jerkson.Json
 import xitrum.RequestVar
+import xitrum.util.Json
 
 // Controller ------------------------------------------------------------------
 
