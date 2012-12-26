@@ -18,7 +18,7 @@ scalacOptions ++= Seq(
 // and it takes several hours to sync from Sonatype to Maven Central
 resolvers += "SonatypeReleases" at "http://oss.sonatype.org/content/repositories/releases/"
 
-libraryDependencies += "tv.cntt" %% "xitrum" % "1.12"
+libraryDependencies += "tv.cntt" %% "xitrum" % "1.13-SNAPSHOT"
 
 // Xitrum uses Jerkson
 resolvers += "repo.codahale.com" at "http://repo.codahale.com"
