@@ -42,9 +42,11 @@ scalacOptions += "-P:continuations:enable"
 
 seq(scalateSettings:_*)
 
-scalateTemplateDirectory in Compile <<= (baseDirectory) { _ / "src/main/view" }
-
-scalateBindings += Binding("helper", "xitrum.Controller", true)
+scalateTemplateConfig in Compile := Seq(TemplateConfig(
+  file("src") / "main" / "scalate",
+  Seq(),
+  Seq(Binding("helper", "xitrum.Controller", true))
+))
 
 // Put config directory in classpath for easier development --------------------
 
