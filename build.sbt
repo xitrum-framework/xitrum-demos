@@ -7,7 +7,7 @@ name         := "xitrum-demos"
 
 version      := "1.0-SNAPSHOT"
 
-scalaVersion := "2.9.2"
+scalaVersion := "2.10.0"
 
 scalacOptions ++= Seq(
   "-deprecation",
@@ -34,7 +34,7 @@ addCompilerPlugin("tv.cntt" %% "xitrum-xgettext" % "1.1")
 
 // xitrum.imperatively uses Scala continuation, also a compiler plugin ---------
 
-addCompilerPlugin("org.scala-lang.plugins" % "continuations" % "2.9.2")
+addCompilerPlugin("org.scala-lang.plugins" % "continuations" % "2.10.0")
 
 scalacOptions += "-P:continuations:enable"
 
