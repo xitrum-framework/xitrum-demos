@@ -1,6 +1,5 @@
 package demos.controller
 
-import scala.collection.mutable.{Map => MMap}
 import xitrum.SockJsHandler
 import xitrum.sockjs.{MessageQueue, QueueMessage}
 

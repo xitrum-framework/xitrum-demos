@@ -1,6 +1,5 @@
 package demos.controller
 
-import scala.collection.mutable.{Map => MMap}
 import xitrum.sockjs.{MessageQueue, QueueMessage}
 
 object WebSocketChat extends WebSocketChat
