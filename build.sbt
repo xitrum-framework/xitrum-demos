@@ -18,7 +18,7 @@ scalacOptions ++= Seq(
 // and it takes several hours to sync from Sonatype to Maven Central
 resolvers += "SonatypeReleases" at "http://oss.sonatype.org/content/repositories/releases/"
 
-libraryDependencies += "tv.cntt" %% "xitrum" % "1.13"
+libraryDependencies += "tv.cntt" %% "xitrum" % "1.14"
 
 // Xitrum uses Jerkson
 resolvers += "repo.codahale.com" at "http://repo.codahale.com"
@@ -45,7 +45,7 @@ scalacOptions += "-P:continuations:enable"
 seq(scalateSettings:_*)
 
 scalateTemplateConfig in Compile := Seq(TemplateConfig(
-  file("src") / "main" / "scalate",
+  file("src") / "main" / "scalate",  // See scalateDir in config/xitrum.conf
   Seq(),
   Seq(Binding("helper", "xitrum.Controller", true))
 ))
