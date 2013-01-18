@@ -1,6 +1,6 @@
 package demos.controller
 
-import xitrum.sockjs.{MessageQueue, QueueMessage}
+import xitrum.mq.{MessageQueue, QueueMessage}
 
 object WebSocketChat extends WebSocketChat
 
