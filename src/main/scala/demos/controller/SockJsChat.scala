@@ -1,6 +1,6 @@
 package demos.controller
 
-import xitrum.SockJsHandler
+import xitrum.{Controller, SockJsHandler}
 import xitrum.mq.{MessageQueue, QueueMessage}
 
 object SockJsChatHandler extends SockJsChatHandler
@@ -18,7 +18,7 @@ class SockJsChatHandler extends SockJsHandler {
     false
   }
 
-  def onOpen(session: Map[String, Any]) {
+  def onOpen(controller: Controller) {
     MessageQueue.subscribe(TOPIC, listener, 0)
   }
 
