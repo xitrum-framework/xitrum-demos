@@ -23,16 +23,18 @@ script#todo-template(type="text/html")
     / /ko
 
 -
-  koApplyBindingsCs(RVTodoList.get, Todos.save, """
-    $('#new_todo_form').submit ->
-      if $('#new_todo_form').valid()
-        desc = $('#new_todo_desc').val()
-        $('#new_todo_desc').val('')
-        todo = {done: false, desc: desc}
-        model.todos.push(ko.mapping.fromJS(todo))
-      false
+  koApplyBindings(RVTodoList.get, Todos.save, """
+    $('#new_todo_form').submit(function() {
+      if ($('#new_todo_form').valid()) {
+        var desc = $('#new_todo_desc').val();
+        $('#new_todo_desc').val('');
+        var todo = {done: false, desc: desc};
+        model.todos.push(ko.mapping.fromJS(todo));
+      }
+      return false;
+    });
 
-    $('#save').click(sync)
+    $('#save').click(sync);
   """)
 
 div
