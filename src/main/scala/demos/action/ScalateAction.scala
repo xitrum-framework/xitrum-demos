@@ -1,17 +1,20 @@
-package demos.controller
+package demos.action
 
+import xitrum.annotation.GET
 import xitrum.view.Scalate
 
-object ScalateController extends ScalateController
-
-class ScalateController extends AppController {
-  def fromDB = GET("fromDB") {
-    val template = "p This Jade template is loaded from DB"
+@GET("scalate/notFile")
+class ScalateJadeString extends AppAction {
+  def execute() {
+    val template = "p This Jade template is from a string, not from a file."
     val string   = Scalate.renderJadeString(template)
     respondInlineView(string)
   }
+}
 
-  def mustache = GET("mustache") {
+@GET("scalate/mustache")
+class ScalateMustache extends AppAction {
+  def execute() {
     at("name")        = "Chris"
     at("value")       = 10000
     at("taxed_value") = 10000 - (10000 * 0.4)

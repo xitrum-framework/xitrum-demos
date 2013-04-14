@@ -1,0 +1,15 @@
+- import demos.action._
+- val article = RVArticle.get
+
+h1 Edit article
+
+form(action={url[ArticlesUpdate]("id" -> article.id)} method="post")
+  != antiCSRFInput
+  input(type="hidden" name="_method" value="put")
+
+  - at("article") = article
+  != renderFragment("ArticlesForm")
+
+p
+  a(href={url[ArticlesShow]("id" -> article.id)}) Cancel |
+  a(href={url[ArticlesIndex]}) List of articles

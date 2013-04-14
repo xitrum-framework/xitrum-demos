@@ -1,19 +1,23 @@
-package demos.controller
+package demos.action
 
 import scala.xml.NodeBuffer
+
+import xitrum.annotation.GET
 import xitrum.imperatively.{Imperatively, SessionHolder}
 
-object BoringGreeter extends BoringGreeter
-
-class BoringGreeter extends AppController {
-  def boring = GET("boring") {
+@GET("imperatively/boring")
+class GreeterBoring extends AppAction {
+  def execute() {
     SessionHolder.set(session)
     val params: Map[String, String] = textParams.filterNot(x => x._2.isEmpty).map(x => (x._1, x._2.head)).toMap
     val iboring = new ImperativelyBoring
     respondInlineView(iboring.nextStep(params))
   }
+}
 
-  def greeter = GET("greeter") {
+@GET("imperatively/greeter")
+class GreeterLessBoring extends AppAction {
+  def execute() {
     SessionHolder.set(session)
     val params: Map[String, String] = textParams.filterNot(x => x._2.isEmpty).map(x => (x._1, x._2.head)).toMap
     val igreeter = new ImperativelyGreeter

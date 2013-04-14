@@ -1,4 +1,4 @@
-- import demos.controller._
+- import demos.action._
 
 !!! 5
 html
@@ -21,54 +21,58 @@ html
   body
     .container_12
       h1
-        a(href={Site.index.url}) Welcome to Xitrum
+        a(href={url[SiteIndex]}) Xitrum Demos
 
       .grid_8
-        p
-          != currentController.asInstanceOf[AppController].sourceCodeLink
         #flash
           !~ jsRenderFlash()
         != renderedView
 
       .grid_4
-        h3 Samples
+        h3 Demos
 
+        p
+          a(href="https://github.com/ngocdaothanh/xitrum-demos/tree/master/src/main") Source code
+
+        p Various demos
         ul
           li
-            a(href={Articles.index.url}) REST
+            a(href={url[ArticlesIndex]}) REST
           li
-            a(href={Site.forward.url}) forwardTo
+            a(href={url[ForwardDemo]}) forwardTo
           li
-            a(href={Todos.index.url}) Knockout.js
+            a(href={url[TodosIndex]}) Knockout.js
 
         p Scalate
         ul
           li
-            a(href={ScalateController.fromDB.url}) Template from DB
+            a(href={url[ScalateJadeString]}) Template from string
           li
-            a(href={ScalateController.mustache.url}) Mustache template
+            a(href={url[ScalateMustache]}) Mustache template
 
         p Async
         ul
           li
-            a(href={WebSocketChat.index.url}) WebSocket chat
+            a(href={url[ActionActorDemo]}) ActionActor (delayed 3s)
           li
-            a(href={SockJsChat.index.url}) SockJS chat
+            a(href={url[WebSocketChat]}) WebSocket chat
+          li
+            a(href={url[SockJsChat]}) SockJS chat
 
         p Filters
         ul
           li
-            a(href={BeforeFilter.index.url}) Before filter
+            a(href={url[BeforeFilter]}) Before filter
           li
-            a(href={AfterFilterController.index.url}) After filter
+            a(href={url[AfterFilter]}) After filter
           li
-            a(href={AroundFilter.index.url}) Around filter
+            a(href={url[AroundFilter]}) Around filter
 
         p Imperatively
         ul
           li
-            a(href={BoringGreeter.boring.url}) Boring
+            a(href={url[GreeterBoring]}) Boring greeter
           li
-            a(href={BoringGreeter.greeter.url}) Greeter
+            a(href={url[GreeterLessBoring]}) Less boring greeter
 
     != jsForView

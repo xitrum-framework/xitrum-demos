@@ -1,4 +1,4 @@
-- import demos.controller.WebSocketChat
+- import demos.action._
 
 h1 WebSocket chat
 
@@ -6,7 +6,7 @@ h1 WebSocket chat
 input(type="text" id="chatInput" name="chatInput" class="required" disabled="disabled")
 
 script
-  = "var url = '" + WebSocketChat.webSocketEntry.webSocketAbsoluteUrl + "';"
+  = "var url = '" + webSocketAbsUrl[WebSocketChatActor] + "';"
 
 :javascript
   var socket;

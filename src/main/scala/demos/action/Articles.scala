@@ -1,42 +1,49 @@
-package demos.controller
+package demos.action
 
 import scala.collection.mutable.ArrayBuffer
+
 import xitrum.RequestVar
+import xitrum.annotation.{First, GET, POST, PUT, DELETE}
 import xitrum.validator.Required
 
-// Controller ------------------------------------------------------------------
+// Actions ---------------------------------------------------------------------
 
 // Request vars for passing data from action to Scalate view
 object RVArticle  extends RequestVar[Article]
 object RVArticles extends RequestVar[Seq[Article]]
 
-// For use in AppController.jade
-object Articles extends Articles
-
-class Articles extends AppController {
-  pathPrefix = "articles"
-
-  def index = GET {
+@GET("articles")
+class ArticlesIndex extends AppAction {
+  def execute() {
     val articles = Article.findAll()
     RVArticles.set(articles)
     respondView()
   }
+}
 
-  def show = GET(":id<[0-9]+>") {
+@GET("articles/:id<[0-9]+>")
+class ArticlesShow extends AppAction {
+  def execute() {
     val id      = param[Int]("id")
     var article = Article.find(id)
     RVArticle.set(article)
     respondView()
   }
+}
 
-  // "first" for this route to have higher routing priority than "show" above
-  def nevv = first.GET("new") {
+@First  // This route has higher priority than "ArticlesShow" above
+@GET("articles/new")
+class ArticlesNew extends AppAction {
+  def execute() {
     val article = new Article()
     RVArticle.set(article)
     respondView()
   }
+}
 
-  def create = POST {
+@POST("articles")
+class ArticlesCreate extends AppAction {
+  def execute() {
     val title   = param("title")
     val body    = param("body")
     val article = Article(title = title, body = body)
@@ -44,22 +51,28 @@ class Articles extends AppController {
       case None =>
         val id = Article.insert(article)
         flash("Article has been saved")
-        redirectTo(show, "id" -> id)
+        redirectTo[ArticlesShow]("id" -> id)
       case Some(msg) =>
         RVArticle.set(article)
         flash(msg)
-        respondView(nevv)
+        respondView(classOf[ArticlesNew])
     }
   }
+}
 
-  def edit = GET(":id/edit") {
+@GET("articles/:id/edit")
+class ArticlesEdit extends AppAction {
+  def execute() {
     val id      = param[Int]("id")
     var article = Article.find(id)
     RVArticle.set(article)
     respondView()
   }
+}
 
-  def update = PUT(":id") {
+@PUT("articles/:id")
+class ArticlesUpdate extends AppAction {
+  def execute() {
     val id      = param[Int]("id")
     val title   = param("title")
     val body    = param("body")
@@ -68,19 +81,22 @@ class Articles extends AppController {
       case None =>
         Article.update(article)
         flash("Article has been saved")
-        redirectTo(show, "id" -> id)
+        redirectTo[ArticlesShow]("id" -> id)
       case Some(msg) =>
         RVArticle.set(article)
         flash(msg)
-        respondView(edit)
+        respondView(classOf[ArticlesEdit])
     }
   }
+}
 
-  def destroy = DELETE(":id") {
+@DELETE("articles/:id")
+class ArticlesDestroy extends AppAction {
+  def execute() {
     val id = param[Int]("id")
     Article.delete(id)
     flash("Article has been deleted")
-    redirectTo(index)
+    redirectTo[ArticlesIndex]()
   }
 }
 

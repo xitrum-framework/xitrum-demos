@@ -1,0 +1,10 @@
+- import demos.action._
+- val article = RVArticle.get
+
+h1= article.title
+
+p= article.body
+
+p
+  a(href={url[ArticlesEdit]("id" -> article.id)}) Edit |
+  a(href={url[ArticlesIndex]}) List of articles

@@ -1,0 +1,13 @@
+- import demos.action._
+- val article = RVArticle.get
+
+h1 Create new article
+
+form(action={url[ArticlesCreate]} method="post")
+  != antiCSRFInput
+
+  - at("article") = article
+  != renderFragment("ArticlesForm")
+
+p
+  a(href={url[ArticlesIndex]}) List of articles

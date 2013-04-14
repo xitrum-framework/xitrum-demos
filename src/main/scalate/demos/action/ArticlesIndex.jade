@@ -1,0 +1,11 @@
+- import demos.action._
+
+h1 Articles
+
+ul
+  - for (article <- RVArticles.get)
+    li
+      a(href={url[ArticlesShow]("id" -> article.id)})= article.title
+
+p
+  a(href={url[ArticlesNew]}) Create new

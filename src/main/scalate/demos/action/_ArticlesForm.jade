@@ -1,0 +1,15 @@
+- import demos.action._
+- val article = at("article").asInstanceOf[Article]
+
+label Title:
+br
+input(type="text" name="title" value={article.title})
+br
+
+label Body:
+br
+textarea(name="body" rows=20 cols=60)= article.body
+br
+
+p
+  input(type="submit" value="Save")

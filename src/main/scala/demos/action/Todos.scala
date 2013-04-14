@@ -1,24 +1,26 @@
-package demos.controller
+package demos.action
 
 import xitrum.RequestVar
+import xitrum.annotation.{GET, POST}
 import xitrum.util.Json
 
-// Controller ------------------------------------------------------------------
+// Actions ---------------------------------------------------------------------
 
 // Request var for passing data from action to Scalate view
 object RVTodoList extends RequestVar[TodoList]
 
-// For use in AppController.jade
-object Todos extends Todos
-
-class Todos extends AppController {
-  def index = GET("todos") {
+@GET("todos")
+class TodosIndex extends AppAction {
+  def execute() {
     val todoList = TodoList.get()
     RVTodoList.set(todoList)
     respondView()
   }
+}
 
-  def save = POST("todos") {
+@POST("todos")
+class TodosSave extends AppAction {
+  def execute() {
     val json     = param("model")
     val todoList = Json.parse[TodoList](json)
     TodoList.update(todoList)

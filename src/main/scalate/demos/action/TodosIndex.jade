@@ -1,4 +1,4 @@
-- import demos.controller.{Todos, RVTodoList}
+- import demos.action._
 
 h1 Todo list
 
@@ -23,18 +23,16 @@ script#todo-template(type="text/html")
     / /ko
 
 -
-  koApplyBindings(RVTodoList.get, Todos.save, """
-    $('#new_todo_form').submit(function() {
-      if ($('#new_todo_form').valid()) {
-        var desc = $('#new_todo_desc').val();
-        $('#new_todo_desc').val('');
-        var todo = {done: false, desc: desc};
-        model.todos.push(ko.mapping.fromJS(todo));
-      }
-      return false;
-    });
+  koApplyBindingsCs(RVTodoList.get, classOf[TodosSave], """
+    $('#new_todo_form').submit ->
+      if $('#new_todo_form').valid()
+        desc = $('#new_todo_desc').val()
+        $('#new_todo_desc').val('')
+        todo = {done: false, desc: desc}
+        model.todos.push(ko.mapping.fromJS(todo))
+      false
 
-    $('#save').click(sync);
+    $('#save').click(sync)
   """)
 
 div
