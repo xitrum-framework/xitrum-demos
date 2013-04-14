@@ -2,7 +2,7 @@ package demos.action
 
 import akka.actor.Actor
 
-import xitrum.{Action, SockJsActor, SockJsText, WebSocketActor, WebSocketText, WebSocketBinary, WebSocketPing, WebSocketPong}
+import xitrum.{SockJsActor, SockJsText, WebSocketActor, WebSocketText, WebSocketBinary, WebSocketPing, WebSocketPong}
 import xitrum.annotation.{GET, SOCKJS, WEBSOCKET}
 import xitrum.mq.{MessageQueue, QueueMessage}
 
@@ -42,7 +42,7 @@ trait MessageQueueListener {
 
 @SOCKJS("sockJsChat")
 class SockJsChatActor extends SockJsActor with MessageQueueListener {
-  def execute(action: Action) {
+  def execute() {
     MessageQueue.subscribe(TOPIC, listener, 0)
     context.become {
       case MsgsFromQueue(msgs) =>
@@ -56,7 +56,7 @@ class SockJsChatActor extends SockJsActor with MessageQueueListener {
 
 @WEBSOCKET("websocketChat")
 class WebSocketChatActor extends WebSocketActor with MessageQueueListener {
-  def execute(action: Action) {
+  def execute() {
     MessageQueue.subscribe(TOPIC, listener, 0)
     context.become {
       case MsgsFromQueue(msgs) =>
