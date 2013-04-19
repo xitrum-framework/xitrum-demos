@@ -9,12 +9,12 @@ html
     meta(content="text/html; charset=utf-8" http-equiv="content-type")
     title Welcome to Xitrum
 
-    link(type="image/vnd.microsoft.icon" rel="shortcut icon" href={urlForPublic("favicon.ico")})
+    link(type="image/vnd.microsoft.icon" rel="shortcut icon" href={publicUrl("favicon.ico")})
 
-    link(type="text/css" rel="stylesheet" media="all" href={urlForPublic("css/960/reset.css")})
-    link(type="text/css" rel="stylesheet" media="all" href={urlForPublic("css/960/text.css")})
-    link(type="text/css" rel="stylesheet" media="all" href={urlForPublic("css/960/960.css")})
-    link(type="text/css" rel="stylesheet" media="all" href={urlForPublic("css/app.css")})
+    link(type="text/css" rel="stylesheet" media="all" href={publicUrl("css/960/reset.css")})
+    link(type="text/css" rel="stylesheet" media="all" href={publicUrl("css/960/text.css")})
+    link(type="text/css" rel="stylesheet" media="all" href={publicUrl("css/960/960.css")})
+    link(type="text/css" rel="stylesheet" media="all" href={publicUrl("css/app.css")})
 
     != jsDefaults
 
@@ -67,6 +67,13 @@ html
             a(href={url[AfterFilter]}) After filter
           li
             a(href={url[AroundFilter]}) Around filter
+
+        p Cache
+        ul
+          li
+            a(href={url[ActionCacheDemo]}) Action cache
+          li
+            a(href={url[PageCacheDemo]}) Page cache
 
         p Imperatively
         ul
