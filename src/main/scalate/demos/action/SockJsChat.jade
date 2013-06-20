@@ -5,42 +5,44 @@ h1 SockJS chat
 #chatOutput
 input(type="text" id="chatInput" name="chatInput" class="required" disabled="disabled")
 
-script
-  = "var url = '" + sockJsUrl[SockJsChatActor] + "';"
+-
+  jsAddToView(
+    "var url = '" + sockJsUrl[SockJsChatActor] + "';" +
+    """
+    var socket;
 
-:javascript
-  var socket;
+    // Do not put in initSocket so that this event handler is registered only once
+    $('#chatInput').keypress(function(event) {
+      var keycode = (event.keyCode ? event.keyCode : event.which);
+      if (keycode == '13') {
+        socket.send($('#chatInput').val());
+        $('#chatInput').val('');
+      }
+    });
 
-  // Do not put in initSocket so that this event handler is registered only once
-  $('#chatInput').keypress(function(event) {
-    var keycode = (event.keyCode ? event.keyCode : event.which);
-    if (keycode == '13') {
-      socket.send($('#chatInput').val());
-      $('#chatInput').val('');
-    }
-  });
+    var initSocket = function() {
+      socket = new SockJS(url);
 
-  var initSocket = function() {
-    socket = new SockJS(url);
+      socket.onopen = function(event) {
+        var text = '<b>[Connected]</b><br />';
+        xitrum.appendAndScroll('#chatOutput', text);
+        $('#chatInput').removeAttr('disabled');
+      };
 
-    socket.onopen = function(event) {
-      var text = '<b>[Connected]</b><br />';
-      xitrum.appendAndScroll('#chatOutput', text);
-      $('#chatInput').removeAttr('disabled');
+      socket.onclose = function(event) {
+        var text = '<b>[Disconnected]</b><br />';
+        xitrum.appendAndScroll('#chatOutput', text);
+        $('#chatInput').attr('disabled', 'disabled');
+
+        // Reconnect
+        setTimeout(initSocket, 1000);
+      };
+
+      socket.onmessage = function(event) {
+        var text = '- ' + xitrum.escapeHtml(event.data) + '<br />';
+        xitrum.appendAndScroll('#chatOutput', text);
+      };
     };
-
-    socket.onclose = function(event) {
-      var text = '<b>[Disconnected]</b><br />';
-      xitrum.appendAndScroll('#chatOutput', text);
-      $('#chatInput').attr('disabled', 'disabled');
-
-      // Reconnect
-      setTimeout(initSocket, 1000);
-    };
-
-    socket.onmessage = function(event) {
-      var text = '- ' + xitrum.escapeHtml(event.data) + '<br />';
-      xitrum.appendAndScroll('#chatOutput', text);
-    };
-  };
-  initSocket();
+    initSocket();
+    """
+  )
