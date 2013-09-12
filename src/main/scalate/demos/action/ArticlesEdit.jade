@@ -4,7 +4,7 @@
 h1 Edit article
 
 form(action={url[ArticlesUpdate]("id" -> article.id)} method="post")
-  != antiCSRFInput
+  != antiCsrfInput
   input(type="hidden" name="_method" value="put")
 
   - at("article") = article
