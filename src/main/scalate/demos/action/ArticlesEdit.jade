@@ -5,7 +5,7 @@ h1 Edit article
 
 form(action={url[ArticlesUpdate]("id" -> article.id)} method="post")
   != antiCsrfInput
-  input(type="hidden" name="_method" value="put")
+  input(type="hidden" name="_method" value="patch")
 
   - at("article") = article
   != renderFragment("ArticlesForm")

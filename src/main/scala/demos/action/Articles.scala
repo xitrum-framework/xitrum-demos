@@ -3,14 +3,14 @@ package demos.action
 import scala.collection.mutable.ArrayBuffer
 
 import xitrum.RequestVar
-import xitrum.annotation.{First, GET, POST, PUT, DELETE}
+import xitrum.annotation.{First, GET, POST, PATCH, DELETE}
 import xitrum.validator.Required
 
 // Actions ---------------------------------------------------------------------
 
 // Request vars for passing data from action to Scalate view
 object RVArticle  extends RequestVar[Article]
-object RVArticles extends RequestVar[Seq[Article]]
+object RVArticles extends RequestVar[Iterable[Article]]
 
 @GET("articles")
 class ArticlesIndex extends AppAction {
@@ -45,8 +45,8 @@ class ArticlesNew extends AppAction {
 class ArticlesCreate extends AppAction {
   def execute() {
     val title   = param("title")
-    val body    = param("body")
-    val article = Article(title = title, body = body)
+    val content = param("content")
+    val article = Article(title = title, content = content)
     article.v match {
       case None =>
         val id = Article.insert(article)
@@ -70,13 +70,13 @@ class ArticlesEdit extends AppAction {
   }
 }
 
-@PUT("articles/:id")
+@PATCH("articles/:id")
 class ArticlesUpdate extends AppAction {
   def execute() {
     val id      = param[Int]("id")
     val title   = param("title")
-    val body    = param("body")
-    val article = Article(id, title, body)
+    val content = param("content")
+    val article = Article(id, title, content)
     article.v match {
       case None =>
         Article.update(article)
@@ -102,33 +102,36 @@ class ArticlesDestroy extends AppAction {
 
 // Model -----------------------------------------------------------------------
 
-case class Article(id: Int = 0, title: String = "", body: String = "") {
+case class Article(id: Int = 0, title: String = "", content: String = "") {
   // Returns Some(error message) or None
   def v =
-    Required.v("Title", title) orElse
-    Required.v("Body",  body)
+    Required.v("Title",   title) orElse
+    Required.v("Content", content)
 }
 
 object Article {
-  val storage = ArrayBuffer[Article]()
+  var storage = Map[Int, Article]()
+  var nextId  = 1
+
   insert(Article(1, "Title 1", "Body 1"))
   insert(Article(2, "Title 2", "Body 2"))
 
-  def findAll() = storage
+  def findAll() = storage.values
 
-  def find(id: Int) = storage(id - 1)
+  def find(id: Int) = storage(id)
 
   def insert(article: Article): Int = synchronized {
-    val article2 = Article(storage.length + 1, article.title, article.body)
-    storage.append(article2)
+    val article2 = Article(nextId, article.title, article.content)
+    storage = storage + (nextId -> article2)
+    nextId += 1
     article2.id
   }
 
   def update(article: Article) = synchronized {
-    storage(article.id - 1) = article
+    storage = storage + (article.id -> article)
   }
 
   def delete(id: Int) = synchronized {
-    storage.remove(id - 1)
+    storage = storage - id
   }
 }
