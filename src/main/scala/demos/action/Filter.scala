@@ -5,7 +5,7 @@ import xitrum.annotation.GET
 @GET("filter/before")
 class BeforeFilter extends AppAction {
   beforeFilter {
-    logger.info("I run therefore I am")
+    log.info("I run therefore I am")
     true
   }
 
@@ -18,7 +18,7 @@ class BeforeFilter extends AppAction {
 @GET("filter/after")
 class AfterFilter extends AppAction {
   afterFilter {
-    logger.info("Run at " + System.currentTimeMillis())
+    log.info("Run at " + System.currentTimeMillis())
   }
 
   def execute() {
@@ -32,7 +32,7 @@ class AroundFilter extends AppAction {
     val begin = System.currentTimeMillis()
     action()
     val end   = System.currentTimeMillis()
-    logger.info("The action took " + (end - begin) + " [ms]")
+    log.info("The action took " + (end - begin) + " [ms]")
   }
 
   def execute()  {

@@ -8,7 +8,7 @@ trait TenSecsCacheAction extends AppAction
 @GET("cache/action")
 class ActionCacheDemo extends TenSecsCacheAction {
   beforeFilter {
-    logger.info("Filter is run")
+    log.info("Filter is run")
     true
   }
 
@@ -25,7 +25,7 @@ class ActionCacheDemo extends TenSecsCacheAction {
 @CachePageSecond(10)
 class PageCacheDemo extends AppAction {
   beforeFilter {
-    logger.info("Filter is run")
+    log.info("Filter is run")
     true
   }
 

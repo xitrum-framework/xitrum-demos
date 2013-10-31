@@ -4,7 +4,7 @@
 html
   head
     != antiCsrfMeta
-    != xitrumCSS
+    != xitrumCss
 
     meta(content="text/html; charset=utf-8" http-equiv="content-type")
     title Welcome to Xitrum
@@ -37,7 +37,9 @@ html
           li
             a(href={url[ArticlesIndex]}) REST
           li
-            a(href={url[xitrum.routing.SwaggerIndexAction]}) Swagger Doc (api_key = 123)
+            a(href={url[ArticlesDotShow]("id" -> 1, "format" -> "foo")}) Dot in path
+          li
+            a(href={url[xitrum.routing.SwaggerUi]}) Swagger Doc (api_key = 123)
           li
             a(href={url[ForwardDemo]}) forwardTo
           li

@@ -17,7 +17,7 @@ trait Api extends Action with SkipCsrfCheck {
 }
 
 @GET("api/articles")
-@Swagger("List all articles")
+@Swagger(Swagger.Summary("List all articles"))
 class ApiArticlesIndex extends Api {
   def execute() {
     val articles = Article.findAll()
@@ -27,7 +27,7 @@ class ApiArticlesIndex extends Api {
 
 @GET("api/articles/:id<[0-9]+>")
 @Swagger(
-  "Show an article",
+  Swagger.Summary("Show an article"),
   Swagger.IntPath("id", "ID of the article")
 )
 class ApiArticlesShow extends Api {
@@ -40,7 +40,7 @@ class ApiArticlesShow extends Api {
 
 @POST("api/articles")
 @Swagger(
-  "Create a new article",
+  Swagger.Summary("Create a new article"),
   Swagger.StringForm("title"),
   Swagger.StringForm("content"),
   Swagger.Response(200, "ID of the newly created article will be returned")
@@ -62,7 +62,7 @@ class ApiArticlesCreate extends Api {
 
 @PATCH("api/articles/:id")
 @Swagger(
-  "Modify an article",
+  Swagger.Summary("Modify an article"),
   Swagger.IntPath("id", "ID of the article to modify"),
   Swagger.StringForm("title", "New title"),
   Swagger.StringForm("content", "New content")
@@ -85,7 +85,7 @@ class ApiArticlesUpdate extends Api {
 
 @DELETE("api/articles/:id")
 @Swagger(
-  "Delete an article",
+  Swagger.Summary("Delete an article"),
   Swagger.IntPath("id")
 )
 class ApiArticlesDestroy extends Api {
