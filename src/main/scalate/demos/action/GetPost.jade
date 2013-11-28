@@ -1,0 +1,17 @@
+-import demos.action.GetPost
+
+p
+  | Request method:
+  b= request.getMethod
+
+textarea(cols="80" rows="20")= request
+
+br
+
+a(href={url[GetPost]}) Send GET request to this URL
+
+br
+
+form(method="post" action={url[GetPost]})
+  != antiCsrfInput
+  input(type="submit" value="Send POST request to this URL")

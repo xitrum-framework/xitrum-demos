@@ -94,9 +94,14 @@ class ArticlesUpdate extends AppAction {
 class ArticlesDestroy extends AppAction {
   def execute() {
     val id = param[Int]("id")
-    Article.delete(id)
-    flash("Article has been deleted")
-    redirectTo[ArticlesIndex]()
+    if (id == 1) {
+      flash("This article is for demo, can't be deleted")
+      redirectTo[ArticlesIndex]()
+    } else {
+      Article.delete(id)
+      flash("Article has been deleted")
+      redirectTo[ArticlesIndex]()
+    }
   }
 }
 

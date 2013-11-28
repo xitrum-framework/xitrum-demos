@@ -35,8 +35,6 @@ html
         p Various demos
         ul
           li
-            a(href={url[ArticlesIndex]}) REST
-          li
             a(href={url[ArticlesDotShow]("id" -> 1, "format" -> "foo")}) Dot in path
           li
             a(href={url[xitrum.routing.SwaggerUi]}) Swagger Doc (api_key = 123)
@@ -44,6 +42,19 @@ html
             a(href={url[ForwardDemo]}) forwardTo
           li
             a(href={url[TodosIndex]}) Knockout.js
+          li
+            a(href={url[GetPost]}) Multiple routes to an action
+
+        p REST
+        ul
+          li
+            a(href={url[ArticlesIndex]}) index
+          li
+            a(href={url[ArticlesShow]("id" -> 1)}) show
+          li
+            a(href={url[ArticlesEdit]("id" -> 1)}) edit
+          li
+            a(href={url[ArticlesNew]}) new
 
         p Scalate
         ul
