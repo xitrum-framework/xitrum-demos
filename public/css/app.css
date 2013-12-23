@@ -13,3 +13,9 @@ a {
 #chatInput {
   width: 98%;
 }
+
+pre.prettyprint{
+	overflow-x:scroll;
+	padding-left:1%;
+	font-size:12px;
+}

@@ -29,7 +29,7 @@ scalacOptions ++= Seq("-deprecation", "-feature", "-unchecked")
 // and it takes several hours to sync from Sonatype to Maven Central
 resolvers += "SonatypeReleases" at "http://oss.sonatype.org/content/repositories/releases/"
 
-libraryDependencies += "tv.cntt" %% "xitrum" % "2.13"
+libraryDependencies += "tv.cntt" %% "xitrum" % "2.14"
 
 libraryDependencies += "tv.cntt" %% "xitrum-ko" % "1.0"
 
@@ -61,4 +61,4 @@ unmanagedClasspath in Compile <+= (baseDirectory) map { bd => Attributed.blank(b
 unmanagedClasspath in Runtime <+= (baseDirectory) map { bd => Attributed.blank(bd / "config") }
 
 // Copy these to target/xitrum when sbt xitrum-package is run
-XitrumPackage.copy("config", "public", "script")
+XitrumPackage.copy("config", "public", "script", "src")

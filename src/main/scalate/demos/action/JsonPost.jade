@@ -1,0 +1,81 @@
+-import demos.action.{SourceRenderer, JsonPost, MyClass}
+
+p In this demo, you can send a POST request like this:
+
+ul
+  li Content-Type: application/json
+  li Content: {"x": 1, "y": 2}
+
+table
+  tr
+    td(style="width:300px;")
+      b At server side, parse JSON request content by...
+    td(style="width:60px;")
+      b x
+    td(style="width:60px;")
+      b y
+    td(style="width:30px;")
+  tr
+    td
+      span Map[String, Int]
+    td
+      span 1
+    td
+      span 2
+    td
+      button(id="button1" value="Send POST request to this URL") post
+  tr
+    td
+      span case MyClass(x: Int, y: Int)
+    td
+      span 3
+    td
+      span 4
+    td
+      button(id="button2" value="Send POST request to this URL") post
+
+p POST response:
+
+pre(id="res")
+
+
+script
+  = "var action = '" + {url[JsonPost]} + "';"
+
+:javascript
+  function post(payload) {
+    $.ajax({
+      type: 'POST',
+      url: payload.url,
+      contentType: 'application/json',
+      dataType: 'text',
+      data: JSON.stringify(payload.input)
+    })
+    .done(function(data) {
+      $('#res').text(data)
+    });
+  }
+
+  function loaded() {
+    $('table tr td').css({'border':'solid 1px gray', 'text-align':'center'});
+    $('#button1').on('click',function(e){
+      e.preventDefault();
+      var payload = {
+        url: action + '/1',
+        input: {'x':1, 'y':2}
+      };
+      post(payload);
+    });
+    $('#button2').on('click', function(e) {
+      e.preventDefault();
+      var payload = {
+        url: action + '/2',
+        input: {'x':3, 'y':4}
+      };
+      post(payload);
+    });
+  }
+
+-
+  jsAddToView("loaded();")
+

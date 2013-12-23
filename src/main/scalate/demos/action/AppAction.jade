@@ -1,5 +1,7 @@
 - import demos.action._
 
+- val currentActionFileName = at("currentActionFileName").asInstanceOf[String]
+
 !!! 5
 html
   head
@@ -26,6 +28,12 @@ html
           !~ jsRenderFlash()
         != renderedView
 
+        hr
+        h2 Source code of current action
+        div
+          b= "demos/action/"+currentActionFileName
+          pre(id="actionSrc" class="prettyprint linenums:1 lang-scala")
+
       .grid_4
         h3 Demos
 
@@ -44,6 +52,8 @@ html
             a(href={url[TodosIndex]}) Knockout.js
           li
             a(href={url[GetPost]}) Multiple routes to an action
+          li
+            a(href={url[JsonPost]}) Json POST parse action
 
         p REST
         ul
@@ -95,5 +105,10 @@ html
           li
             a(href={url[GreeterLessBoring]}) Less boring greeter
 
+    -# To avoid auto indentation of jade, once write as js string.
+    script
+      != "var action = '" + SourceRenderer.render("src/main/scala/demos/action/" + currentActionFileName).replaceAll("\n","#LINEEND#").replaceAll("'","#QUOTE#") + "';"
+      = "document.getElementById('actionSrc').innerHTML = action.replace(/#LINEEND#/g,'\\n').replace(/#QUOTE#/g,'\\''); action = null;"
+    script(src={publicUrl("js/run_prettify.js")})
     != jsDefaults
     != jsForView
