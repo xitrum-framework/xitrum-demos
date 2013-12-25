@@ -45,6 +45,8 @@ html
           li
             a(href={url[ArticlesDotShow]("id" -> 1, "format" -> "foo")}) Dot in path
           li
+            a(href={url[Upload]}) File upload
+          li
             a(href={url[xitrum.routing.SwaggerUi]}) Swagger Doc (api_key = 123)
           li
             a(href={url[ForwardDemo]}) forwardTo
@@ -107,8 +109,8 @@ html
 
     -# To avoid auto indentation of jade, once write as js string.
     script
-      != "var action = '" + SourceRenderer.render("src/main/scala/demos/action/" + currentActionFileName).replaceAll("\n","#LINEEND#").replaceAll("'","#QUOTE#") + "';"
-      = "document.getElementById('actionSrc').innerHTML = action.replace(/#LINEEND#/g,'\\n').replace(/#QUOTE#/g,'\\''); action = null;"
+      != "(function(){var sourceAction = '" + SourceRenderer.render("src/main/scala/demos/action/" + currentActionFileName).replaceAll("\n","#LINEEND#").replaceAll("'","#QUOTE#") + "';"
+      = "document.getElementById('actionSrc').innerHTML = sourceAction.replace(/#LINEEND#/g,'\\n').replace(/#QUOTE#/g,'\\''); sourceAction = null;})();"
     script(src={publicUrl("js/run_prettify.js")})
     != jsDefaults
     != jsForView

@@ -7,6 +7,6 @@ trait AppAction extends Action {
     // stack(0) is AppAction, stack(1) is current extended Action
     val stack = new RuntimeException("").getStackTrace()
     at("currentActionFileName") = stack(1).getFileName()
-    renderViewNoLayout(classOf[AppAction])
+    renderViewNoLayout[AppAction]()
   }
 }

@@ -55,7 +55,7 @@ class ArticlesCreate extends AppAction {
       case Some(msg) =>
         RVArticle.set(article)
         flash(msg)
-        respondView(classOf[ArticlesNew])
+        respondView[ArticlesNew]()
     }
   }
 }
@@ -85,7 +85,7 @@ class ArticlesUpdate extends AppAction {
       case Some(msg) =>
         RVArticle.set(article)
         flash(msg)
-        respondView(classOf[ArticlesEdit])
+        respondView[ArticlesEdit]()
     }
   }
 }

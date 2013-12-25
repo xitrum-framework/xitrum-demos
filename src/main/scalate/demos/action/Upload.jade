@@ -1,0 +1,6 @@
+-import demos.action.DoUpload
+
+form(enctype="multipart/form-data" method="post" action={url[DoUpload]})
+  != antiCsrfInput
+  input(type="file" name="file")
+  input(type="submit" value="Upload")
