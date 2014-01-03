@@ -10,6 +10,17 @@ form(method="post" action={url[OpenIdRedirect]})
     br
     | (Ex: https://www.google.com/accounts/o8/id)
 
+p OpenID login works like this:
+
+ol
+  li The user inputs his OpenID URL.
+  li You redirect the user to the remote OpenID provider (another site).
+  li At the remote site, the user may cancel the login or proceed the login.
+  li The remote site redirects the user back to your site.
+  li You verify the above request.
+
+p Most OpenID libraries allow you to manually handle step 2 and 5.
+
 p Notes:
 
 ul
@@ -18,5 +29,5 @@ ul
     a(href="https://code.google.com/p/openid4java/wiki/QuickStart") OpenID4Java
   li
     | To securely verify the login, some data must be saved in session. This data
-    | is bigger than cookie limit (4KB), so you can't use xitrum.scope.session.CookieSessionStore
-    | (see xitrum.conf).
+    | is bigger than cookie limit (4KB), so you can't use cookie to store session
+    | (see xitrum.scope.session.CookieSessionStore in xitrum.conf).
