@@ -1,6 +1,5 @@
 package demos.action
 
-import scala.collection.JavaConverters._
 import scala.util.control.NonFatal
 
 import org.openid4java.consumer.ConsumerManager
