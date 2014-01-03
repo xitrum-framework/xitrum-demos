@@ -1,0 +1,22 @@
+-import demos.action.OpenIdRedirect
+
+form(method="post" action={url[OpenIdRedirect]})
+  != antiCsrfInput
+
+  p
+    | Your OpenID URL:
+    input(type="text" name="openId" size="60")
+    input(type="submit" value="Login")
+    br
+    | (Ex: https://www.google.com/accounts/o8/id)
+
+p Notes:
+
+ul
+  li
+    | This login demo is based on
+    a(href="https://code.google.com/p/openid4java/wiki/QuickStart") OpenID4Java
+  li
+    | To securely verify the login, some data must be saved in session. This data
+    | is bigger than cookie limit (4KB), so you can't use xitrum.scope.session.CookieSessionStore
+    | (see xitrum.conf).

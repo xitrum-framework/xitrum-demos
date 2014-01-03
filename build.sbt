@@ -36,6 +36,9 @@ libraryDependencies += "tv.cntt" %% "xitrum-ko" % "1.0"
 // Xitrum uses SLF4J, an implementation of SLF4J is needed
 libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.0.13"
 
+// OpenID demo
+libraryDependencies += "org.openid4java" % "openid4java" % "0.9.8"
+
 // xgettext i18n translation key string extractor is a compiler plugin ---------
 
 autoCompilerPlugins := true
