@@ -29,12 +29,12 @@ class OpenIdLogin extends AppAction {
 class OpenIdRedirect extends AppAction {
   def execute() {
     try {
-      val openId            = param("openId")
-      val discoveries       = OpenId.manager.discover(openId)
-      val discovered        = OpenId.manager.associate(discoveries)
-      val returnUrl         = absUrl[OpenIdVerify]  // Must be http(s)://...
-      val authReq           = OpenId.manager.authenticate(discovered, returnUrl)
-      val destinationUrl    = authReq.getDestinationUrl(true)
+      val openId         = param("openId")
+      val discoveries    = OpenId.manager.discover(openId)
+      val discovered     = OpenId.manager.associate(discoveries)
+      val returnUrl      = absUrl[OpenIdVerify]  // Must be http(s)://...
+      val authReq        = OpenId.manager.authenticate(discovered, returnUrl)
+      val destinationUrl = authReq.getDestinationUrl(true)
 
       session(OpenId.SESSION_KEY) = discovered
       redirectTo(destinationUrl)
@@ -56,11 +56,11 @@ class OpenIdVerify extends AppAction {
       val discovered   = session(OpenId.SESSION_KEY).asInstanceOf[DiscoveryInformation]
       val receivingUrl = absUrl[OpenIdVerify] + "?" + queryString
       val verification = OpenId.manager.verify(receivingUrl, openIdResp, discovered)
-      val verified     = verification.getVerifiedId
+      val verifiedId   = verification.getVerifiedId
 
       session.clear()
-      if (verified != null)
-        flash("OpenID login success: " + verified)
+      if (verifiedId != null)
+        flash("OpenID login success: " + verifiedId)
       else
         flash("OpenID login failed")
     } catch {
