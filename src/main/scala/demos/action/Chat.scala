@@ -3,7 +3,7 @@ package demos.action
 import akka.actor.{Actor, ActorRef, Props, Terminated}
 import glokka.Registry
 
-import xitrum.{Config, Log, SockJsActor, SockJsText, WebSocketActor, WebSocketText, WebSocketBinary, WebSocketPing, WebSocketPong}
+import xitrum.{Config, Log, SockJsAction, SockJsText, WebSocketAction, WebSocketText, WebSocketBinary, WebSocketPing, WebSocketPong}
 import xitrum.annotation.{GET, SOCKJS, WEBSOCKET}
 
 @GET("sockJsChatDemo")
@@ -21,7 +21,7 @@ class WebSocketChat extends AppAction {
 }
 
 @SOCKJS("sockJsChat")
-class SockJsChatActor extends SockJsActor with LookupOrCreateChatRoom {
+class SockJsChatActor extends SockJsAction with LookupOrCreateChatRoom {
   def execute() {
     joinChatRoom()
   }
@@ -36,7 +36,7 @@ class SockJsChatActor extends SockJsActor with LookupOrCreateChatRoom {
 }
 
 @WEBSOCKET("websocketChat")
-class WebSocketChatActor extends WebSocketActor with LookupOrCreateChatRoom {
+class WebSocketChatActor extends WebSocketAction with LookupOrCreateChatRoom {
   def execute() {
     joinChatRoom()
   }
@@ -62,12 +62,19 @@ object ChatRoom {
   val ROOM_NAME  = "chatRoom"
   val PROXY_NAME = "chatRoomProxy"
 
+  // Subscribers:
+  // * To join a chat room, send Join
+  // * When there's a chat message, receive Msg
   case object Join
   case class  Msg(body: String)
 
+  // Registry is used for looking up chat room actor by name.
+  // For simplicity, this demo uses only one chat room (lobby chat room).
+  // If you want many chat rooms, create more chat rooms with different names.
   val registry = Registry.start(Config.actorSystem, PROXY_NAME)
 }
 
+/** Subclasses should implement onJoinChatRoom and call joinChatRoom. */
 trait LookupOrCreateChatRoom {
   this: Actor =>
 
@@ -86,18 +93,16 @@ trait LookupOrCreateChatRoom {
       context.become(onJoinChatRoom(chatRoom))
 
     case Registry.LookupResultNone(_) =>
-      val tmpChatRoom = Config.actorSystem.actorOf(Props[ChatRoom])
-      registry ! Registry.Register(ROOM_NAME, tmpChatRoom)
-      context.become(waitForRegisterResult(tmpChatRoom))
+      registry ! Registry.RegisterByProps(ROOM_NAME, Props[ChatRoom])
+      context.become(waitForRegisterResult)
   }
 
-  private def waitForRegisterResult(tmpChatRoom: ActorRef): Actor.Receive = {
+  private def waitForRegisterResult: Actor.Receive = {
     case Registry.RegisterResultOk(_, chatRoom) =>
       chatRoom ! Join
       context.become(onJoinChatRoom(chatRoom))
 
     case Registry.RegisterResultConflict(_, chatRoom) =>
-      Config.actorSystem.stop(tmpChatRoom)
       chatRoom ! Join
       context.become(onJoinChatRoom(chatRoom))
   }

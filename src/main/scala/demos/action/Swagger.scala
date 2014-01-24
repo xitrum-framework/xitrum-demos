@@ -1,6 +1,6 @@
 package demos.action
 
-import org.jboss.netty.handler.codec.http.HttpResponseStatus
+import io.netty.handler.codec.http.HttpResponseStatus
 import xitrum.{Action, SkipCsrfCheck}
 import xitrum.annotation.{GET, POST, PATCH, DELETE, Swagger}
 

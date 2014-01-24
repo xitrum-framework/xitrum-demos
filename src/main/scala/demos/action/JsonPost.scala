@@ -1,6 +1,6 @@
 package demos.action
 
-import org.jboss.netty.handler.codec.http.HttpMethod
+import io.netty.handler.codec.http.HttpMethod
 import xitrum.annotation.{GET, POST}
 
 case class MyClass(x: Int, y: Int)

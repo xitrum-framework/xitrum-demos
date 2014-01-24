@@ -1,6 +1,6 @@
 package demos.action
 
-import org.jboss.netty.handler.codec.http.multipart.FileUpload
+import io.netty.handler.codec.http.multipart.FileUpload
 import xitrum.annotation.{GET, POST}
 
 @GET("upload")
