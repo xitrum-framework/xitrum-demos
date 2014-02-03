@@ -115,8 +115,8 @@ case class Article(id: Int = 0, title: String = "", content: String = "") {
 }
 
 object Article {
-  var storage = Map[Int, Article]()
-  var nextId  = 1
+  private var storage = Map[Int, Article]()
+  private var nextId  = 1
 
   insert(Article(1, "Title 1", "Body 1"))
   insert(Article(2, "Title 2", "Body 2"))
