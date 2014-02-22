@@ -11,7 +11,7 @@ scalateTemplateConfig in Compile := Seq(TemplateConfig(
   Seq(Binding("helper", "xitrum.Action", true))
 ))
 
-libraryDependencies += "tv.cntt" %% "xitrum-scalate" % "1.5"
+libraryDependencies += "tv.cntt" %% "xitrum-scalate" % "1.6"
 
 //------------------------------------------------------------------------------
 
@@ -29,12 +29,12 @@ scalacOptions ++= Seq("-deprecation", "-feature", "-unchecked")
 // and it takes several hours to sync from Sonatype to Maven Central
 resolvers += "SonatypeReleases" at "http://oss.sonatype.org/content/repositories/releases/"
 
-libraryDependencies += "tv.cntt" %% "xitrum" % "3.0"
+libraryDependencies += "tv.cntt" %% "xitrum" % "3.1"
 
 libraryDependencies += "tv.cntt" %% "xitrum-ko" % "1.0"
 
 // Xitrum uses SLF4J, an implementation of SLF4J is needed
-libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.0.13"
+libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.1.1"
 
 // OpenID demo
 libraryDependencies += "org.openid4java" % "openid4java" % "0.9.8"

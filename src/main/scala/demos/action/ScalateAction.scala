@@ -1,13 +1,15 @@
 package demos.action
 
+import xitrum.Config
 import xitrum.annotation.GET
 import xitrum.view.Scalate
 
 @GET("scalate/notFile")
 class ScalateJadeString extends AppAction {
   def execute() {
+    val scalate  = Config.xitrum.template.get.asInstanceOf[Scalate]
     val template = "p This Jade template is from a string, not from a file."
-    val string   = Scalate.renderJadeString(template)
+    val string   = scalate.renderJadeString(template)
     respondInlineView(string)
   }
 }
