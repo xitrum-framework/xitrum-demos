@@ -2,7 +2,7 @@ package demos.action
 
 import xitrum.RequestVar
 import xitrum.annotation.{GET, POST}
-import xitrum.util.Json
+import xitrum.util.SeriDeseri
 
 // Actions ---------------------------------------------------------------------
 
@@ -22,16 +22,17 @@ class TodosIndex extends AppAction {
 class TodosSave extends AppAction {
   def execute() {
     val json     = param("model")
-    val todoList = Json.parse[TodoList](json)
-    TodoList.update(todoList)
-    jsRespondFlash("Todo list has been saved")
+    val todoList = SeriDeseri.fromJson[TodoList](json).get
 
-    // From here, you can update the model on the browser like this:
+    // You can update the model on the browser like this:
     // val newTodoList = ...
     // respondJson(newTodoList)
     //
     // Whenever the model on the browser is updated, Knockout.js will automagically
     // update the UI!
+
+    TodoList.update(todoList)
+    jsRespondFlash("Todo list has been saved")
   }
 }
 

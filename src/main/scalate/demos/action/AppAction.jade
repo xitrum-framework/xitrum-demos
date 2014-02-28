@@ -33,6 +33,7 @@ html
         div
           b= "demos/action/"+currentActionFileName
           pre(id="actionSrc" class="prettyprint linenums:1 lang-scala")
+            ~~ SourceRenderer.render("src/main/scala/demos/action/" + currentActionFileName)
 
       .grid_4
         h3 Demos
@@ -58,6 +59,8 @@ html
             a(href={url[JsonPost]}) Json POST parse action
           li
             a(href={url[OpenIdLogin]}) OpenID login
+          li
+            a(href={url[FileMonitor]}) File Monitor
 
         p REST
         ul
@@ -109,10 +112,6 @@ html
           li
             a(href={url[GreeterLessBoring]}) Less boring greeter
 
-    -# To avoid auto indentation of jade, once write as js string.
-    script
-      != "(function(){var sourceAction = '" + SourceRenderer.render("src/main/scala/demos/action/" + currentActionFileName).replaceAll("\n","#LINEEND#").replaceAll("'","#QUOTE#") + "';"
-      = "document.getElementById('actionSrc').innerHTML = sourceAction.replace(/#LINEEND#/g,'\\n').replace(/#QUOTE#/g,'\\''); sourceAction = null;})();"
-    script(src={publicUrl("js/run_prettify.js")})
     != jsDefaults
     != jsForView
+    script(src={publicUrl("js/run_prettify.js")})

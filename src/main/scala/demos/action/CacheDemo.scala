@@ -14,9 +14,14 @@ class ActionCacheDemo extends TenSecsCacheAction {
 
   def execute() {
     respondInlineView(
-      "In production mode, this action is cached 10 seconds. " +
-      "For action cache, filters are run. Please try refreshing and see the log. " +
-      "System.currentTimeMillis(): " + System.currentTimeMillis()
+      <ul>
+        <li>
+          In production mode, this action is cached 10 seconds.
+          (<b>System.currentTimeMillis()</b> below will not change in 10 seconds.)
+        </li>
+        <li>For action cache, filters are run. Please try refreshing and see the log.</li>
+        <li>System.currentTimeMillis(): {System.currentTimeMillis()}</li>
+      </ul>
     )
   }
 }
@@ -31,9 +36,14 @@ class PageCacheDemo extends AppAction {
 
   def execute() {
     respondInlineView(
-      "In production mode, this page is cached 10 seconds. " +
-      "For page cache, filters are NOT run. Please try refreshing and see the log. " +
-      "System.currentTimeMillis(): " + System.currentTimeMillis()
+      <ul>
+        <li>
+          In production mode, this page is cached 10 seconds.
+          (<b>System.currentTimeMillis()</b> below will not change in 10 seconds).
+        </li>
+        <li>For page cache, filters are NOT run. Please try refreshing and see the log.</li>
+        <li>System.currentTimeMillis(): {System.currentTimeMillis()}</li>
+      </ul>
     )
   }
 }
