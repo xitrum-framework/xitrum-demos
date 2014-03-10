@@ -13,7 +13,7 @@ ol
 
 -
   jsAddToView(
-    "var url = '" + webSocketAbsUrl[FileMonitorSocket] + "';" +
+    "var url = '" + sockJsUrl[FileMonitorSocket] + "';" +
     """
     var socket;
 
@@ -23,7 +23,7 @@ ol
       if (!window.WebSocket) {
         alert("Your browser does not support WebSocket.");
       } else {
-        socket = new WebSocket(url);
+        socket = new SockJS(url);
 
         socket.onopen = function(event) {
         };

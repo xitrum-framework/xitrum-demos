@@ -4,8 +4,9 @@ import java.io.BufferedWriter
 import java.io.FileWriter
 import java.nio.file.Path
 
-import xitrum.WebSocketAction
-import xitrum.annotation.{GET, WEBSOCKET}
+
+import xitrum.SockJsAction
+import xitrum.annotation.{GET, SOCKJS}
 import xitrum.util.{FileMonitor => xFileMonitor}
 
 @GET("fileMonitor")
@@ -15,11 +16,11 @@ class FileMonitor extends AppAction {
   }
 }
 
-@WEBSOCKET("fileMonitor")
-class FileMonitorSocket extends WebSocketAction {
+@SOCKJS("fileMonitorSocket")
+class FileMonitorSocket extends SockJsAction {
   def execute() {
-    def respondToClient(body: Any) {
-      respondWebSocketText(body)
+    def respondToClient(body: String) {
+      respondSockJsText(body)
     }
 
     def deleteCB(unmonitorPath: Path): (Path => Unit) = { deletedFilePath: Path =>
@@ -34,9 +35,10 @@ class FileMonitorSocket extends WebSocketAction {
       // Start monitoring delete event on modified file
       xFileMonitor.monitor(xFileMonitor.DELETE, modifiedFile, deleteCB(modifiedFile))
       respondToClient("[Registered]: File delete monitor is registered to:")
-      respondToClient(modifiedFile)
+      respondToClient(modifiedFile.toString)
 
       // Delete file
+      Thread.sleep(1000)
       modifiedFile.toFile.delete()
     }
 
@@ -47,9 +49,10 @@ class FileMonitorSocket extends WebSocketAction {
       // Start monitoring modify event on created file.
       xFileMonitor.monitor(xFileMonitor.MODIFY, createdFilePath, modifyCB(createdFilePath))
       respondToClient("[Registered]: File modification monitor is registered to:")
-      respondToClient(createdFilePath)
+      respondToClient(createdFilePath.toString)
 
       // Modify file
+      Thread.sleep(1000)
       val writer = new BufferedWriter(new FileWriter(createdFilePath.toFile))
       writer.write("There's text in here wee!!")
       writer.close()
@@ -63,9 +66,10 @@ class FileMonitorSocket extends WebSocketAction {
     // Start monitoring create event in config dir
     xFileMonitor.monitor(xFileMonitor.CREATE, targetDirPath, createCB(targetDirPath))
     respondToClient("[Registered]: File creation monitor is registered to:")
-    respondToClient(targetDirPath)
+    respondToClient(targetDirPath.toString)
 
     // Create File
+    Thread.sleep(1000)
     targetFilePath.toFile.createNewFile()
   }
 }
