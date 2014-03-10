@@ -19,25 +19,20 @@ ol
 
 
     var initSocket = function() {
-      if (!window.WebSocket) window.WebSocket = window.MozWebSocket;
-      if (!window.WebSocket) {
-        alert("Your browser does not support WebSocket.");
-      } else {
-        socket = new SockJS(url);
+      socket = new SockJS(url);
 
-        socket.onopen = function(event) {
-        };
+      socket.onopen = function(event) {
+      };
 
-        socket.onclose = function(event) {
-          // Reconnect
-          setTimeout(initSocket, 1000);
-        };
+      socket.onclose = function(event) {
+        // Reconnect
+        setTimeout(initSocket, 1000);
+      };
 
-        socket.onmessage = function(event) {
-          var text = event.data + '<br />';
-          xitrum.appendAndScroll('#chatOutput', text);
-        };
-      }
+      socket.onmessage = function(event) {
+        var text = event.data + '<br />';
+        xitrum.appendAndScroll('#chatOutput', text);
+      };
     };
     initSocket();
     """
