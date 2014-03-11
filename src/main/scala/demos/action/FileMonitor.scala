@@ -1,9 +1,7 @@
 package demos.action
 
-import java.io.BufferedWriter
-import java.io.FileWriter
-import java.nio.file.Path
-
+import java.io.{BufferedWriter, FileWriter}
+import java.nio.file.{Path, Paths}
 
 import xitrum.SockJsAction
 import xitrum.annotation.{GET, SOCKJS}
@@ -58,8 +56,8 @@ class FileMonitorSocket extends SockJsAction {
       writer.close()
     }
 
-    val targetDirPath  = xFileMonitor.pathFromString("config")
-    val targetFilePath = xFileMonitor.pathFromString("config/created_"+System.currentTimeMillis())
+    val targetDirPath  = Paths.get("config").toAbsolutePath
+    val targetFilePath = Paths.get("config/created_"+System.currentTimeMillis()).toAbsolutePath
     // Stop current monitor if exists
     xFileMonitor.unmonitor(xFileMonitor.CREATE, targetDirPath)
 
