@@ -31,7 +31,7 @@ resolvers += "SonatypeReleases" at "http://oss.sonatype.org/content/repositories
 
 libraryDependencies += "tv.cntt" %% "xitrum" % "3.4"
 
-libraryDependencies += "tv.cntt" %% "xitrum-ko" % "1.1"
+libraryDependencies += "tv.cntt" %% "xitrum-ko" % "1.2"
 
 // Xitrum uses SLF4J, an implementation of SLF4J is needed
 libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.1.1"
