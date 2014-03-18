@@ -83,26 +83,13 @@ trait LookupOrCreateChatRoom {
   def onJoinChatRoom(chatRoom: ActorRef): Actor.Receive
 
   def joinChatRoom() {
-    registry ! Registry.LookupOrCreate(ROOM_NAME)
-    context.become(waitForLookupResult)
+    registry ! Registry.Register(ROOM_NAME, Props[ChatRoom])
+    context.become(waitForRegisterResult)
   }
 
-  private def waitForLookupResult(): Actor.Receive = {
-    case Registry.LookupResultOk(_, chatRoom) =>
-      chatRoom ! Join
-      context.become(onJoinChatRoom(chatRoom))
-
-    case Registry.LookupResultNone(_) =>
-      registry ! Registry.RegisterByProps(ROOM_NAME, Props[ChatRoom])
-      context.become(waitForRegisterResult)
-  }
-
-  private def waitForRegisterResult: Actor.Receive = {
-    case Registry.RegisterResultOk(_, chatRoom) =>
-      chatRoom ! Join
-      context.become(onJoinChatRoom(chatRoom))
-
-    case Registry.RegisterResultConflict(_, chatRoom) =>
+  private def waitForRegisterResult(): Actor.Receive = {
+    case msg: Registry.FoundOrCreated =>
+      val chatRoom = msg.ref
       chatRoom ! Join
       context.become(onJoinChatRoom(chatRoom))
   }
