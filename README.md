@@ -1,4 +1,6 @@
-Demos for [Xitrum](http://ngocdaothanh.github.com/xitrum).
+Xitrum projects require Java 7+.
+
+This project contains various demos for [Xitrum](http://ngocdaothanh.github.com/xitrum).
 
 ```
 git clone https://github.com/ngocdaothanh/xitrum-demos.git
