@@ -41,27 +41,6 @@ html
         p
           a(href="https://github.com/ngocdaothanh/xitrum-demos/tree/master/src/main") Source code
 
-        p Various demos
-        ul
-          li
-            a(href={url[ArticlesDotShow]("id" -> 1, "format" -> "foo")}) Dot in path
-          li
-            a(href={url[Upload]}) File upload
-          li
-            a(href={url[xitrum.routing.SwaggerUi]}) Swagger Doc (api_key = 123)
-          li
-            a(href={url[ForwardDemo]}) forwardTo
-          li
-            a(href={url[TodosIndex]}) Knockout.js
-          li
-            a(href={url[GetPost]}) Multiple routes to an action
-          li
-            a(href={url[JsonPost]}) Json POST parse action
-          li
-            a(href={url[OpenIdLogin]}) OpenID login
-          li
-            a(href={url[FileMonitor]}) File Monitor
-
         p REST
         ul
           li
@@ -72,13 +51,6 @@ html
             a(href={url[ArticlesEdit]("id" -> 1)}) edit
           li
             a(href={url[ArticlesNew]}) new
-
-        p Scalate
-        ul
-          li
-            a(href={url[ScalateJadeString]}) Template from string
-          li
-            a(href={url[ScalateMustache]}) Mustache template
 
         p Async
         ul
@@ -104,6 +76,34 @@ html
             a(href={url[ActionCacheDemo]}) Action cache
           li
             a(href={url[PageCacheDemo]}) Page cache
+
+        p Scalate
+        ul
+          li
+            a(href={url[ScalateJadeString]}) Template from string
+          li
+            a(href={url[ScalateMustache]}) Mustache template
+
+        p Various demos
+        ul
+          li
+            a(href={url[ArticlesDotShow]("id" -> 1, "format" -> "foo")}) Dot in path
+          li
+            a(href={url[Upload]}) File upload
+          li
+            a(href={url[xitrum.routing.SwaggerUi]}) Swagger Doc (api_key = 123)
+          li
+            a(href={url[ForwardDemo]}) forwardTo
+          li
+            a(href={url[TodosIndex]}) Knockout.js
+          li
+            a(href={url[GetPost]}) Multiple routes to an action
+          li
+            a(href={url[JsonPost]}) Json POST parse action
+          li
+            a(href={url[OpenIdLogin]}) OpenID login
+          li
+            a(href={url[FileMonitor]}) File Monitor
 
         p Imperatively
         ul
