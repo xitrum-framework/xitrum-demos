@@ -34,7 +34,7 @@ javacOptions ++= Seq("-source", "1.7", "-target", "1.7")
 // and it takes several hours to sync from Sonatype to Maven Central
 resolvers += "SonatypeReleases" at "http://oss.sonatype.org/content/repositories/releases/"
 
-libraryDependencies += "tv.cntt" %% "xitrum" % "3.6"
+libraryDependencies += "tv.cntt" %% "xitrum" % "3.7"
 
 libraryDependencies += "tv.cntt" %% "xitrum-ko" % "1.2"
 
