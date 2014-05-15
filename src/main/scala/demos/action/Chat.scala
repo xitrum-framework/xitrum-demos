@@ -55,7 +55,7 @@ class WebSocketChatActor extends WebSocketAction with LookupOrCreateChatRoom {
 }
 
 //------------------------------------------------------------------------------
-// See https://github.com/ngocdaothanh/glokka
+// See https://github.com/xitrum-framework/glokka
 
 object ChatRoom {
   val MAX_MSGS   = 20

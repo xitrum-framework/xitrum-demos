@@ -1,9 +1,9 @@
 Xitrum projects require Java 7+.
 
-This project contains various demos for [Xitrum](http://ngocdaothanh.github.com/xitrum).
+This project contains various demos for [Xitrum](http://xitrum-framework.github.com/xitrum).
 
 ```
-git clone https://github.com/ngocdaothanh/xitrum-demos.git
+git clone https://github.com/xitrum-framework/xitrum-demos.git
 cd xitrum-demos
 sbt/sbt run
 ```
