@@ -10,3 +10,12 @@ sbt/sbt run
 
 Now you have a sample project running at http://localhost:8000/
 and https://localhost:4430/
+
+![ScreenShot](screenshot.png)
+
+To generate Eclipse or IntelliJ project:
+
+```
+sbt/sbt eclipse
+sbt/sbt gen-idea
+```

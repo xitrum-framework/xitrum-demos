@@ -13,34 +13,42 @@ html
 
     link(type="image/vnd.microsoft.icon" rel="shortcut icon" href={publicUrl("favicon.ico")})
 
-    link(type="text/css" rel="stylesheet" media="all" href={publicUrl("css/960/reset.css")})
-    link(type="text/css" rel="stylesheet" media="all" href={publicUrl("css/960/text.css")})
-    link(type="text/css" rel="stylesheet" media="all" href={publicUrl("css/960/960.css")})
-    link(type="text/css" rel="stylesheet" media="all" href={publicUrl("css/app.css")})
+    link(type="text/css" rel="stylesheet" media="all" href={webJarsUrl("bootstrap/3.1.1/css", "bootstrap.css", "bootstrap.min.css")})
+    link(type="text/css" rel="stylesheet" media="all" href={publicUrl("app.css")})
 
   body
-    .container_12
-      h1
-        a(href={url[SiteIndex]}) Xitrum Demos
+    .container
+      .navbar-header.navbar.navbar-inverse
+        .navbar-brand
+          a(href={url[SiteIndex]}) Xitrum Demos
+        ul.nav.navbar-nav
+          li
+            a(href="https://github.com/xitrum-framework/xitrum-demos/tree/master/src/main") Source code
+          li
+            a(href="https://github.com/xitrum-framework/xitrum") Xitrum Homepage
+          li
+            a(href="http://xitrum-framework.github.io/xitrum/guide/") Xitrum Guide
+          li
+            a(href="http://xitrum-framework.github.io/xitrum/api/") API Doc
+          li
+            a(href="https://github.com/xitrum-framework/xitrum-new") New Project Skeleton
+          li
+            a(href="https://groups.google.com/group/xitrum-framework") Google Group
 
-      .grid_8
+    .container
+      .col-md-9
         #flash
           !~ jsRenderFlash()
         != renderedView
 
         hr
-        h2 Source code of current action
+        h3 Source code of current action
         div
           b= "demos/action/"+currentActionFileName
           pre(id="actionSrc" class="prettyprint linenums:1 lang-scala")
             ~~ SourceRenderer.render("src/main/scala/demos/action/" + currentActionFileName)
 
-      .grid_4
-        h3 Demos
-
-        p
-          a(href="https://github.com/xitrum-framework/xitrum-demos/tree/master/src/main") Source code
-
+      .col-md-3
         p REST
         ul
           li
@@ -91,8 +99,6 @@ html
           li
             a(href={url[Upload]}) File upload
           li
-            a(href={url[xitrum.routing.SwaggerUi]}) Swagger Doc (api_key = 123)
-          li
             a(href={url[ForwardDemo]}) forwardTo
           li
             a(href={url[TodosIndex]}) Knockout.js
@@ -105,6 +111,13 @@ html
           li
             a(href={url[FileMonitor]}) File Monitor
 
+        p Special demos
+        ul
+          li
+            a(href={url[xitrum.routing.SwaggerUi]}) Swagger (api_key = 123)
+          li
+            a(href={url[xitrum.metrics.XitrumMetricsViewer]("api_key" -> "kgreankbeplawfr7934jv2nr0bsbas0")}) Metrics
+
     != jsDefaults
+    script(src={publicUrl("run_prettify.js")})
     != jsForView
-    script(src={publicUrl("js/run_prettify.js")})

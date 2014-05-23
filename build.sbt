@@ -34,15 +34,17 @@ javacOptions ++= Seq("-source", "1.7", "-target", "1.7")
 // and it takes several hours to sync from Sonatype to Maven Central
 resolvers += "SonatypeReleases" at "http://oss.sonatype.org/content/repositories/releases/"
 
-libraryDependencies += "tv.cntt" %% "xitrum" % "3.12"
+libraryDependencies += "tv.cntt" %% "xitrum" % "3.13"
 
-libraryDependencies += "tv.cntt" %% "xitrum-ko" % "1.3"
+libraryDependencies += "tv.cntt" %% "xitrum-ko" % "1.4"
 
 // Xitrum uses SLF4J, an implementation of SLF4J is needed
 libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.1.2"
 
 // OpenID demo
 libraryDependencies += "org.openid4java" % "openid4java" % "0.9.8"
+
+libraryDependencies += "org.webjars" % "bootstrap" % "3.1.1-1"
 
 // xgettext i18n translation key string extractor is a compiler plugin ---------
 
