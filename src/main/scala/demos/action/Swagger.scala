@@ -50,7 +50,7 @@ class ApiArticlesCreate extends Api {
     val title   = param("title")
     val content = param("content")
     val article = Article(title = title, content = content)
-    article.v match {
+    article.validationMessage match {
       case None =>
         val id = Article.insert(article)
         respondJson(Map("id" -> id))
@@ -73,7 +73,7 @@ class ApiArticlesUpdate extends Api {
     val title   = param("title")
     val content = param("content")
     val article = Article(id, title, content)
-    article.v match {
+    article.validationMessage match {
       case None =>
         Article.update(article)
         respondJson(Map("id" -> id))

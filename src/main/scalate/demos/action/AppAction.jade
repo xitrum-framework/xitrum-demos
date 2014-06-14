@@ -11,7 +11,7 @@ html
     meta(content="text/html; charset=utf-8" http-equiv="content-type")
     title Welcome to Xitrum
 
-    link(type="image/vnd.microsoft.icon" rel="shortcut icon" href={publicUrl("favicon.ico")})
+    link(rel="shortcut icon" href={publicUrl("favicon.ico")})
 
     link(type="text/css" rel="stylesheet" media="all" href={webJarsUrl("bootstrap/3.1.1/css", "bootstrap.css", "bootstrap.min.css")})
     link(type="text/css" rel="stylesheet" media="all" href={publicUrl("app.css")})
@@ -27,9 +27,9 @@ html
           li
             a(href="https://github.com/xitrum-framework/xitrum") Xitrum Homepage
           li
-            a(href="http://xitrum-framework.github.io/xitrum/guide/") Xitrum Guide
+            a(href="http://xitrum-framework.github.io/guide/") Xitrum Guide
           li
-            a(href="http://xitrum-framework.github.io/xitrum/api/") API Doc
+            a(href="http://xitrum-framework.github.io/api/") API Doc
           li
             a(href="https://github.com/xitrum-framework/xitrum-new") New Project Skeleton
           li
@@ -95,17 +95,19 @@ html
         p Various demos
         ul
           li
-            a(href={url[ArticlesDotShow]("id" -> 1, "format" -> "foo")}) Dot in path
-          li
             a(href={url[Upload]}) File upload
           li
-            a(href={url[ForwardDemo]}) forwardTo
+            a(href={url[CompoMain]("param1" -> "value1", "param" -> "value2")}) Component
           li
-            a(href={url[TodosIndex]}) Knockout.js
+            a(href={url[ArticlesDotShow]("id" -> 1, "format" -> "foo")}) Dot in path
+          li
+            a(href={url[ForwardDemo]}) forwardTo
           li
             a(href={url[GetPost]}) Multiple routes to an action
           li
             a(href={url[JsonPost]}) Json POST parse action
+          li
+            a(href={url[TodosIndex]}) Knockout.js
           li
             a(href={url[OpenIdLogin]}) OpenID login
           li

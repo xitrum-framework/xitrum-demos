@@ -47,7 +47,7 @@ class ArticlesCreate extends AppAction {
     val title   = param("title")
     val content = param("content")
     val article = Article(title = title, content = content)
-    article.v match {
+    article.validationMessage match {
       case None =>
         val id = Article.insert(article)
         flash("Article has been saved")
@@ -77,7 +77,7 @@ class ArticlesUpdate extends AppAction {
     val title   = param("title")
     val content = param("content")
     val article = Article(id, title, content)
-    article.v match {
+    article.validationMessage match {
       case None =>
         Article.update(article)
         flash("Article has been saved")
@@ -109,9 +109,9 @@ class ArticlesDestroy extends AppAction {
 
 case class Article(id: Int = 0, title: String = "", content: String = "") {
   // Returns Some(error message) or None
-  def v =
-    Required.v("Title",   title) orElse
-    Required.v("Content", content)
+  def validationMessage =
+    Required.message("Title",   title) orElse
+    Required.message("Content", content)
 }
 
 object Article {

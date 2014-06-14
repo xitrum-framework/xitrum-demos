@@ -1,27 +1,11 @@
-// Scalate template engine config for Xitrum
-// "import" must be at top of build.sbt, or SBT will complain
-import ScalateKeys._
-
-// Precompile Scalate
-seq(scalateSettings:_*)
-
-scalateTemplateConfig in Compile := Seq(TemplateConfig(
-  file("src") / "main" / "scalate",
-  Seq(),
-  Seq(Binding("helper", "xitrum.Action", true))
-))
-
-libraryDependencies += "tv.cntt" %% "xitrum-scalate" % "1.9"
-
-//------------------------------------------------------------------------------
-
 organization := "tv.cntt"
 
 name         := "xitrum-demos"
 
 version      := "1.0-SNAPSHOT"
 
-scalaVersion := "2.11.0"
+scalaVersion := "2.11.1"
+//scalaVersion := "2.10.4"
 
 scalacOptions ++= Seq("-deprecation", "-feature", "-unchecked")
 
@@ -30,21 +14,33 @@ javacOptions ++= Seq("-source", "1.7", "-target", "1.7")
 
 //------------------------------------------------------------------------------
 
-// Most Scala projects are published to Sonatype, but Sonatype is not default
-// and it takes several hours to sync from Sonatype to Maven Central
-resolvers += "SonatypeReleases" at "http://oss.sonatype.org/content/repositories/releases/"
+libraryDependencies += "tv.cntt" %% "xitrum" % "3.14"
 
-libraryDependencies += "tv.cntt" %% "xitrum" % "3.13"
-
-libraryDependencies += "tv.cntt" %% "xitrum-ko" % "1.4"
+libraryDependencies += "tv.cntt" %% "xitrum-ko" % "1.5"
 
 // Xitrum uses SLF4J, an implementation of SLF4J is needed
 libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.1.2"
+
+// For writing condition in logback.xml
+libraryDependencies += "org.codehaus.janino" % "janino" % "2.6.1"
 
 // OpenID demo
 libraryDependencies += "org.openid4java" % "openid4java" % "0.9.8"
 
 libraryDependencies += "org.webjars" % "bootstrap" % "3.1.1-1"
+
+// Scalate template engine config for Xitrum -----------------------------------
+
+libraryDependencies += "tv.cntt" %% "xitrum-scalate" % "2.0"
+
+// Precompile Scalate templates
+seq(scalateSettings:_*)
+
+ScalateKeys.scalateTemplateConfig in Compile := Seq(TemplateConfig(
+  file("src") / "main" / "scalate",
+  Seq(),
+  Seq(Binding("helper", "xitrum.Action", true))
+))
 
 // xgettext i18n translation key string extractor is a compiler plugin ---------
 

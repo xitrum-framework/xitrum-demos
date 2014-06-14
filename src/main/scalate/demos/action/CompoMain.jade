@@ -1,0 +1,18 @@
+- import demos.action._
+
+p
+  | You can create reusable components. A component is similar to an action, but without the
+  code execute
+  | method. A component can have or don't have associated views.
+
+h4 Component that has associated view
+
+!= newComponent[CompoWithView]().render()
+
+h4 Component that renders directly
+
+!= newComponent[CompoWithoutView]().render()
+
+h4 Component that contains other components
+
+!= newComponent[CompoNested]().render()
