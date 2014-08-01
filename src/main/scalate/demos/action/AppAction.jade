@@ -1,7 +1,5 @@
 - import demos.action._
 
-- val currentActionFileName = at("currentActionFileName").asInstanceOf[String]
-
 !!! 5
 html
   head
@@ -44,9 +42,11 @@ html
         hr
         h3 Source code of current action
         div
-          b= "demos/action/"+currentActionFileName
+          -# fileName is only, for example, Articles.scala, not /full/path/to/Articles.scala
+          - val fileName = Source.getSourceFileName(currentAction.getClass.getName)
+          b= "demos/action/" + fileName
           pre(id="actionSrc" class="prettyprint linenums:1 lang-scala")
-            ~~ SourceRenderer.render("src/main/scala/demos/action/" + currentActionFileName)
+            ~~ Source.getFileContent("src/main/scala/demos/action/" + fileName)
 
       .col-md-3
         p REST
