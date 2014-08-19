@@ -2,11 +2,9 @@ package demos.action
 
 import xitrum.annotation.{CacheActionSecond, CachePageSecond, GET}
 
-@CacheActionSecond(10)
-trait TenSecsCacheAction extends AppAction
-
 @GET("cache/action")
-class ActionCacheDemo extends TenSecsCacheAction {
+@CacheActionSecond(10)
+class ActionCacheDemo extends AppAction {
   beforeFilter {
     log.info("Filter is run")
     true

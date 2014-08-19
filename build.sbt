@@ -14,9 +14,9 @@ javacOptions ++= Seq("-source", "1.7", "-target", "1.7")
 
 //------------------------------------------------------------------------------
 
-libraryDependencies += "tv.cntt" %% "xitrum" % "3.17"
+libraryDependencies += "tv.cntt" %% "xitrum" % "3.18"
 
-libraryDependencies += "tv.cntt" %% "xitrum-ko" % "1.5"
+libraryDependencies += "tv.cntt" %% "xitrum-ko" % "1.7"
 
 // Xitrum uses SLF4J, an implementation of SLF4J is needed
 libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.1.2"

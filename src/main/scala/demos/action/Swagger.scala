@@ -4,6 +4,10 @@ import io.netty.handler.codec.http.HttpResponseStatus
 import xitrum.{Action, SkipCsrfCheck}
 import xitrum.annotation.{GET, POST, PATCH, DELETE, Swagger}
 
+@Swagger(
+  Swagger.Resource("articles", "Operations about articles"),
+  Swagger.Produces("application/json")
+)
 trait Api extends Action with SkipCsrfCheck {
   beforeFilter {
     val apiKey  = param("api_key")
@@ -17,7 +21,10 @@ trait Api extends Action with SkipCsrfCheck {
 }
 
 @GET("api/articles")
-@Swagger(Swagger.Summary("List all articles"))
+@Swagger(
+  Swagger.Nickname("index"),
+  Swagger.Summary("List all articles")
+)
 class ApiArticlesIndex extends Api {
   def execute() {
     val articles = Article.findAll()
@@ -27,6 +34,7 @@ class ApiArticlesIndex extends Api {
 
 @GET("api/articles/:id<[0-9]+>")
 @Swagger(
+  Swagger.Nickname("show"),
   Swagger.Summary("Show an article"),
   Swagger.IntPath("id", "ID of the article")
 )
@@ -40,6 +48,7 @@ class ApiArticlesShow extends Api {
 
 @POST("api/articles")
 @Swagger(
+  Swagger.Nickname("create"),
   Swagger.Summary("Create a new article"),
   Swagger.StringForm("title"),
   Swagger.StringForm("content"),
@@ -62,6 +71,7 @@ class ApiArticlesCreate extends Api {
 
 @PATCH("api/articles/:id")
 @Swagger(
+  Swagger.Nickname("update"),
   Swagger.Summary("Modify an article"),
   Swagger.IntPath("id", "ID of the article to modify"),
   Swagger.StringForm("title", "New title"),
@@ -85,6 +95,7 @@ class ApiArticlesUpdate extends Api {
 
 @DELETE("api/articles/:id")
 @Swagger(
+  Swagger.Nickname("destroy"),
   Swagger.Summary("Delete an article"),
   Swagger.IntPath("id")
 )
