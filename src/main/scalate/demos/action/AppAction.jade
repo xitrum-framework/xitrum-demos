@@ -1,5 +1,7 @@
 - import demos.action._
 
+- val metricsApiKey = at[String]("metricsViewerApiKey")
+
 !!! 5
 html
   head
@@ -116,9 +118,9 @@ html
         p Special demos
         ul
           li
-            a(href={url[xitrum.routing.SwaggerUi]}) Swagger (api_key = 123)
+            a(href={url[SwaggerDemo]}) Swagger demo
           li
-            a(href={url[xitrum.metrics.XitrumMetricsViewer]("api_key" -> "kgreankbeplawfr7934jv2nr0bsbas0")}) Metrics
+            a(href={url[xitrum.metrics.XitrumMetricsViewer]("api_key" -> metricsApiKey)}) Metrics
 
     != jsDefaults
     script(src={publicUrl("run_prettify.js")})

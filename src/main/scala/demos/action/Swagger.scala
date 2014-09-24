@@ -14,7 +14,7 @@ trait Api extends Action with SkipCsrfCheck {
     val correct = apiKey == "123"
     if (!correct) {
       response.setStatus(HttpResponseStatus.UNAUTHORIZED)
-      respondJson(Map("error" -> "Incorrect API key (api_key = 123)"))
+      respondJson(Map("error" -> """Incorrect API key (please use "123" as api_key)"""))
     }
     correct
   }
@@ -104,5 +104,12 @@ class ApiArticlesDestroy extends Api {
     val id = param[Int]("id")
     Article.delete(id)
     respondJson(Map("id" -> id))
+  }
+}
+
+@GET("swagger")
+class SwaggerDemo extends AppAction {
+  def execute() {
+    respondView()
   }
 }
