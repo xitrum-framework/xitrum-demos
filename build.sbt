@@ -14,7 +14,7 @@ javacOptions ++= Seq("-source", "1.7", "-target", "1.7")
 
 //------------------------------------------------------------------------------
 
-libraryDependencies += "tv.cntt" %% "xitrum" % "3.20"
+libraryDependencies += "tv.cntt" %% "xitrum" % "3.21"
 
 libraryDependencies += "tv.cntt" %% "xitrum-ko" % "1.7"
 
