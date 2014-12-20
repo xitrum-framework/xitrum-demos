@@ -11,12 +11,10 @@ import xitrum.annotation.{GET, POST, PATCH, DELETE, Swagger}
 trait Api extends Action with SkipCsrfCheck {
   beforeFilter {
     val apiKey  = param("api_key")
-    val correct = apiKey == "123"
-    if (!correct) {
+    if (apiKey != "123") {
       response.setStatus(HttpResponseStatus.UNAUTHORIZED)
       respondJson(Map("error" -> """Incorrect API key (please use "123" as api_key)"""))
     }
-    correct
   }
 }
 

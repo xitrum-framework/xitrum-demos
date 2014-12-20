@@ -6,7 +6,6 @@ import xitrum.annotation.GET
 class BeforeFilter extends AppAction {
   beforeFilter {
     log.info("I run therefore I am")
-    true
   }
 
   // This method is run after the above filters

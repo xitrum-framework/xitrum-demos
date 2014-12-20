@@ -7,7 +7,6 @@ import xitrum.annotation.{CacheActionSecond, CachePageSecond, GET}
 class ActionCacheDemo extends AppAction {
   beforeFilter {
     log.info("Filter is run")
-    true
   }
 
   def execute() {
@@ -29,7 +28,6 @@ class ActionCacheDemo extends AppAction {
 class PageCacheDemo extends AppAction {
   beforeFilter {
     log.info("Filter is run")
-    true
   }
 
   def execute() {
