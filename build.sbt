@@ -16,15 +16,16 @@ javacOptions ++= Seq("-source", "1.7", "-target", "1.7")
 
 libraryDependencies += "tv.cntt" %% "xitrum" % "3.21"
 
-libraryDependencies += "tv.cntt" %% "xitrum-ko" % "1.7"
-
 // Xitrum uses SLF4J, an implementation of SLF4J is needed
 libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.1.2"
 
 // For writing condition in logback.xml
 libraryDependencies += "org.codehaus.janino" % "janino" % "2.7.7"
 
-// OpenID demo
+// For Knockout.js demo
+libraryDependencies += "tv.cntt" %% "xitrum-ko" % "1.7"
+
+// For OpenID demo
 libraryDependencies += "org.openid4java" % "openid4java" % "0.9.8"
 
 libraryDependencies += "org.webjars" % "bootstrap" % "3.3.1"
