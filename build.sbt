@@ -4,7 +4,7 @@ name         := "xitrum-demos"
 
 version      := "1.0-SNAPSHOT"
 
-scalaVersion := "2.11.4"
+scalaVersion := "2.11.5"
 //scalaVersion := "2.10.4"
 
 scalacOptions ++= Seq("-deprecation", "-feature", "-unchecked")
@@ -14,7 +14,7 @@ javacOptions ++= Seq("-source", "1.7", "-target", "1.7")
 
 //------------------------------------------------------------------------------
 
-libraryDependencies += "tv.cntt" %% "xitrum" % "3.21"
+libraryDependencies += "tv.cntt" %% "xitrum" % "3.22"
 
 // Xitrum uses SLF4J, an implementation of SLF4J is needed
 libraryDependencies += "ch.qos.logback" % "logback-classic" % "1.1.2"
@@ -28,7 +28,7 @@ libraryDependencies += "tv.cntt" %% "xitrum-ko" % "1.7"
 // For OpenID demo
 libraryDependencies += "org.openid4java" % "openid4java" % "0.9.8"
 
-libraryDependencies += "org.webjars" % "bootstrap" % "3.3.1"
+libraryDependencies += "org.webjars" % "bootstrap" % "3.3.2"
 
 // Scalate template engine config for Xitrum -----------------------------------
 
