@@ -1,7 +1,5 @@
 package demos.action
 
-import scala.collection.mutable.ArrayBuffer
-
 import xitrum.RequestVar
 import xitrum.annotation.{First, GET, POST, PATCH, DELETE}
 import xitrum.validator.Required
@@ -121,9 +119,9 @@ object Article {
   insert(Article(1, "Title 1", "Body 1"))
   insert(Article(2, "Title 2", "Body 2"))
 
-  def findAll() = storage.values
+  def findAll(): Iterable[Article] = storage.values
 
-  def find(id: Int) = storage(id)
+  def find(id: Int): Option[Article] = storage.get(id)
 
   def insert(article: Article): Int = synchronized {
     val article2 = Article(nextId, article.title, article.content)
@@ -132,11 +130,11 @@ object Article {
     article2.id
   }
 
-  def update(article: Article) = synchronized {
+  def update(article: Article): Unit = synchronized {
     storage = storage + (article.id -> article)
   }
 
-  def delete(id: Int) = synchronized {
+  def delete(id: Int): Unit = synchronized {
     storage = storage - id
   }
 }

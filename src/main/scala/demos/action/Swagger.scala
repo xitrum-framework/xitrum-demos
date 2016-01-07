@@ -28,9 +28,15 @@ class ApiArticlesIndex extends Api {
 )
 class ApiArticlesShow extends Api {
   def execute() {
-    val id      = param[Int]("id")
-    var article = Article.find(id)
-    respondJson(article)
+    val id = param[Int]("id")
+    Article.find(id) match {
+      case None =>
+        response.setStatus(HttpResponseStatus.NOT_FOUND)
+        respondText("Article not found")
+
+      case Some(article) =>
+        respondJson(article)
+    }
   }
 }
 

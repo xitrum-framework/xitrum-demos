@@ -2,6 +2,7 @@ package demos.action
 
 import io.netty.handler.codec.http.HttpMethod
 import xitrum.annotation.{GET, POST}
+import xitrum.util.SeriDeseri
 
 case class MyClass(x: Int, y: Int)
 
@@ -13,12 +14,12 @@ class JsonPost extends AppAction {
       param("demo") match {
         case "1" =>
           // You can parse the JSON as a Map like this:
-          val map = requestContentJson[Map[String, Int]]
+          val map = SeriDeseri.fromJValue[Map[String, Int]](requestContentJValue)
           respondText(map)
 
         case _ =>
           // Or convert it to a (case) class instance
-          val myClass = requestContentJson[MyClass]
+          val myClass = SeriDeseri.fromJValue[MyClass](requestContentJValue)
           respondText(myClass)
       }
     } else {

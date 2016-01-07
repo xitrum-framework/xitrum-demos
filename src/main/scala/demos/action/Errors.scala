@@ -1,6 +1,5 @@
 package demos.action
 
-import xitrum.Action
 import xitrum.annotation.{Error404, Error500}
 
 @Error404
