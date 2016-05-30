@@ -87,7 +87,7 @@ trait LookupOrCreateChatRoom {
     context.become(waitForRegisterResult)
   }
 
-  private def waitForRegisterResult(): Actor.Receive = {
+  private def waitForRegisterResult: Actor.Receive = {
     case msg: Registry.FoundOrCreated =>
       val chatRoom = msg.ref
       chatRoom ! Join

@@ -42,7 +42,7 @@ case class Todo(done: Boolean, desc: String)
 case class TodoList(todos: Seq[Todo])
 
 object TodoList {
-  private var storage = TodoList(Seq(Todo(true, "Task1"), Todo(false, "Task2")))
+  private var storage = TodoList(Seq(Todo(done = true, "Task1"), Todo(done = false, "Task2")))
 
   def get() = storage
   def update(todoList: TodoList) { storage = todoList }

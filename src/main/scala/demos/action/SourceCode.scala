@@ -6,7 +6,7 @@ import javassist.{ClassPool, ClassClassPath}
 import xitrum.Config.xitrum.cache
 import xitrum.util.Loader
 
-object Source {
+object SourceCode {
   private val classPool = {
     val ret       = ClassPool.getDefault
     val classPath = new ClassClassPath(getClass)

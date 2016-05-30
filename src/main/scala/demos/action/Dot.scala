@@ -6,7 +6,7 @@ import xitrum.annotation.GET
 class ArticlesDotShow extends AppAction {
   def execute() {
     val id     = param[Int]("id")
-    var format = param("format")
+    val format = param("format")
     respondInlineView(
       <code>
         URL = {absUrl[ArticlesDotShow]("id" -> 1, "format" -> "foo")}<br />

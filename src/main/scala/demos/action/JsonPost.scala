@@ -10,7 +10,7 @@ case class MyClass(x: Int, y: Int)
 @POST("json/:demo")
 class JsonPost extends AppAction {
   def execute() {
-    if (request.getMethod == HttpMethod.POST) {
+    if (request.method == HttpMethod.POST) {
       param("demo") match {
         case "1" =>
           // You can parse the JSON as a Map like this:

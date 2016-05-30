@@ -51,7 +51,7 @@ class OpenIdRedirect extends AppAction {
 class OpenIdVerify extends AppAction {
   def execute() {
     try {
-      val queryString  = request.getUri.substring(request.getUri.indexOf("?") + 1)
+      val queryString  = request.uri.substring(request.uri.indexOf("?") + 1)
       val openIdResp   = ParameterList.createFromQueryString(queryString)
       val discovered   = session(OpenId.SESSION_KEY).asInstanceOf[DiscoveryInformation]
       val receivingUrl = absUrl[OpenIdVerify] + "?" + queryString

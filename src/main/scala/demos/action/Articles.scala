@@ -23,7 +23,7 @@ class ArticlesIndex extends AppAction {
 class ArticlesShow extends AppAction {
   def execute() {
     val id      = param[Int]("id")
-    var article = Article.find(id)
+    val article = Article.find(id)
     RVArticle.set(article)
     respondView()
   }
@@ -62,7 +62,7 @@ class ArticlesCreate extends AppAction {
 class ArticlesEdit extends AppAction {
   def execute() {
     val id      = param[Int]("id")
-    var article = Article.find(id)
+    val article = Article.find(id)
     RVArticle.set(article)
     respondView()
   }
