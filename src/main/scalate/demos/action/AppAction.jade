@@ -13,7 +13,7 @@ html
 
     link(rel="shortcut icon" href={publicUrl("favicon.ico")})
 
-    link(type="text/css" rel="stylesheet" media="all" href={webJarsUrl("bootstrap/3.3.6/css", "bootstrap.css", "bootstrap.min.css")})
+    link(type="text/css" rel="stylesheet" media="all" href={webJarsUrl("bootstrap-css/3.3.6/css", "bootstrap.css", "bootstrap.min.css")})
     link(type="text/css" rel="stylesheet" media="all" href={publicUrl("app.css")})
 
   body
@@ -39,6 +39,7 @@ html
       .col-md-9
         #flash
           !~ jsRenderFlash()
+
         != renderedView
 
         hr

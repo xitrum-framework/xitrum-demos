@@ -25,7 +25,7 @@ libraryDependencies += "tv.cntt" %% "xitrum-ko" % "1.7"
 // For OpenID demo
 libraryDependencies += "org.openid4java" % "openid4java" % "1.0.0"
 
-libraryDependencies += "org.webjars" % "bootstrap" % "3.3.6"
+libraryDependencies += "org.webjars.bower" % "bootstrap-css" % "3.3.6"
 
 // Scalate template engine config for Xitrum -----------------------------------
 
