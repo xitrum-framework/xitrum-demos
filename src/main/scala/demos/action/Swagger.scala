@@ -57,6 +57,7 @@ class ApiArticlesCreate extends Api {
       case None =>
         val id = Article.insert(article)
         respondJson(Map("id" -> id))
+
       case Some(msg) =>
         respondJson(Map("error" -> msg))
     }
@@ -81,7 +82,9 @@ class ApiArticlesUpdate extends Api {
       case None =>
         Article.update(article)
         respondJson(Map("id" -> id))
+
       case Some(msg) =>
+        response.setStatus(HttpResponseStatus.BAD_REQUEST)
         respondJson(Map("error" -> msg))
     }
   }
@@ -95,8 +98,13 @@ class ApiArticlesUpdate extends Api {
 class ApiArticlesDestroy extends Api {
   def execute() {
     val id = param[Int]("id")
-    Article.delete(id)
-    respondJson(Map("id" -> id))
+    if (id == 1) {
+      response.setStatus(HttpResponseStatus.BAD_REQUEST)
+      respondJson(Map("error" -> "This article is for demo, can't be deleted"))
+    } else {
+      Article.delete(id)
+      respondJson(Map("id" -> id))
+    }
   }
 }
 

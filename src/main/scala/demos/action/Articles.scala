@@ -22,10 +22,15 @@ class ArticlesIndex extends AppAction {
 @GET("articles/:id<[0-9]+>")
 class ArticlesShow extends AppAction {
   def execute() {
-    val id      = param[Int]("id")
-    val article = Article.find(id)
-    RVArticle.set(article)
-    respondView()
+    val id = param[Int]("id")
+    Article.find(id) match {
+      case Some(article) =>
+        RVArticle.set(article)
+        respondView()
+      case None =>
+        flash("Article not found")
+        respond404Page()
+    }
   }
 }
 
@@ -61,10 +66,15 @@ class ArticlesCreate extends AppAction {
 @GET("articles/:id/edit")
 class ArticlesEdit extends AppAction {
   def execute() {
-    val id      = param[Int]("id")
-    val article = Article.find(id)
-    RVArticle.set(article)
-    respondView()
+    val id = param[Int]("id")
+    Article.find(id) match {
+      case Some(article) =>
+        RVArticle.set(article)
+        respondView()
+      case None =>
+        flash("Article not found")
+        respond404Page()
+    }
   }
 }
 
