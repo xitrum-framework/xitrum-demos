@@ -1,4 +1,4 @@
-Xitrum projects require Java 7+.
+Xitrum projects require Java 8+.
 
 This project contains various demos for [Xitrum](http://xitrum-framework.github.io/).
 
