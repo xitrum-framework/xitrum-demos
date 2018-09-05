@@ -5,7 +5,7 @@ This project contains various demos for [Xitrum](http://xitrum-framework.github.
 ```
 git clone https://github.com/xitrum-framework/xitrum-demos.git
 cd xitrum-demos
-sbt/sbt run
+sbt/sbt fgRun
 ```
 
 Now you have a sample project running at http://localhost:8000/
