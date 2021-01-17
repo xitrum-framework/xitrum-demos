@@ -11,7 +11,7 @@ object RVTodoList extends RequestVar[TodoList]
 
 @GET("todos")
 class TodosIndex extends AppAction {
-  def execute() {
+  def execute(): Unit = {
     val todoList = TodoList.get()
     RVTodoList.set(todoList)
     respondView()
@@ -20,7 +20,7 @@ class TodosIndex extends AppAction {
 
 @POST("todos")
 class TodosSave extends AppAction {
-  def execute() {
+  def execute(): Unit = {
     val json     = param("model")
     val todoList = SeriDeseri.fromJson[TodoList](json).get
 
@@ -44,6 +44,6 @@ case class TodoList(todos: Seq[Todo])
 object TodoList {
   private var storage = TodoList(Seq(Todo(done = true, "Task1"), Todo(done = false, "Task2")))
 
-  def get() = storage
-  def update(todoList: TodoList) { storage = todoList }
+  def get(): TodoList = storage
+  def update(todoList: TodoList): Unit = { storage = todoList }
 }

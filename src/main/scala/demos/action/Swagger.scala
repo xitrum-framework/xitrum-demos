@@ -15,7 +15,7 @@ trait Api extends Action with SkipCsrfCheck
   Swagger.Summary("List all articles")
 )
 class ApiArticlesIndex extends Api {
-  def execute() {
+  def execute(): Unit = {
     val articles = Article.findAll()
     respondJson(articles)
   }
@@ -27,7 +27,7 @@ class ApiArticlesIndex extends Api {
   Swagger.IntPath("id", "ID of the article")
 )
 class ApiArticlesShow extends Api {
-  def execute() {
+  def execute(): Unit = {
     val id = param[Int]("id")
     Article.find(id) match {
       case None =>
@@ -49,7 +49,7 @@ class ApiArticlesShow extends Api {
   Swagger.Response(200, "ID of the newly created article will be returned")
 )
 class ApiArticlesCreate extends Api {
-  def execute() {
+  def execute(): Unit = {
     val title   = param("title")
     val content = param("content")
     val article = Article(title = title, content = content)
@@ -73,7 +73,7 @@ class ApiArticlesCreate extends Api {
   Swagger.StringForm("content", "New content")
 )
 class ApiArticlesUpdate extends Api {
-  def execute() {
+  def execute(): Unit = {
     val id      = param[Int]("id")
     val title   = param("title")
     val content = param("content")
@@ -96,7 +96,7 @@ class ApiArticlesUpdate extends Api {
   Swagger.IntPath("id")
 )
 class ApiArticlesDestroy extends Api {
-  def execute() {
+  def execute(): Unit = {
     val id = param[Int]("id")
     if (id == 1) {
       response.setStatus(HttpResponseStatus.BAD_REQUEST)
@@ -110,7 +110,7 @@ class ApiArticlesDestroy extends Api {
 
 @GET("swagger")
 class SwaggerDemo extends AppAction {
-  def execute() {
+  def execute(): Unit = {
     respondView()
   }
 }

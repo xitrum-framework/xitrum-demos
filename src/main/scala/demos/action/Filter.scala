@@ -9,7 +9,7 @@ class BeforeFilter extends AppAction {
   }
 
   // This method is run after the above filters
-  def execute() {
+  def execute(): Unit = {
     respondInlineView("Before filters should have been run, please check the log")
   }
 }
@@ -20,7 +20,7 @@ class AfterFilter extends AppAction {
     log.info("Run at " + System.currentTimeMillis())
   }
 
-  def execute() {
+  def execute(): Unit = {
     respondInlineView("After filter should have been run, please check the log")
   }
 }
@@ -34,7 +34,7 @@ class AroundFilter extends AppAction {
     log.info("The action took " + (end - begin) + " [ms]")
   }
 
-  def execute()  {
+  def execute(): Unit = {
     respondInlineView("Around filter should have been run, please check the log")
   }
 }

@@ -20,14 +20,14 @@ object OpenId {
 
 @GET("openid/login")
 class OpenIdLogin extends AppAction {
-  def execute() {
+  def execute(): Unit = {
     respondView()
   }
 }
 
 @POST("openid/redirect")
 class OpenIdRedirect extends AppAction {
-  def execute() {
+  def execute(): Unit = {
     try {
       val openId         = param("openId")
       val discoveries    = OpenId.manager.discover(openId)
@@ -49,7 +49,7 @@ class OpenIdRedirect extends AppAction {
 
 @GET("openid/verify")
 class OpenIdVerify extends AppAction {
-  def execute() {
+  def execute(): Unit = {
     try {
       val queryString  = request.uri.substring(request.uri.indexOf("?") + 1)
       val openIdResp   = ParameterList.createFromQueryString(queryString)

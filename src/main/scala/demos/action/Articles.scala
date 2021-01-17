@@ -12,7 +12,7 @@ object RVArticles extends RequestVar[Iterable[Article]]
 
 @GET("articles")
 class ArticlesIndex extends AppAction {
-  def execute() {
+  def execute(): Unit = {
     val articles = Article.findAll()
     RVArticles.set(articles)
     respondView()
@@ -21,7 +21,7 @@ class ArticlesIndex extends AppAction {
 
 @GET("articles/:id<[0-9]+>")
 class ArticlesShow extends AppAction {
-  def execute() {
+  def execute(): Unit = {
     val id = param[Int]("id")
     Article.find(id) match {
       case Some(article) =>
@@ -37,7 +37,7 @@ class ArticlesShow extends AppAction {
 @First  // This route has higher priority than "ArticlesShow" above
 @GET("articles/new")
 class ArticlesNew extends AppAction {
-  def execute() {
+  def execute(): Unit = {
     val article = new Article()
     RVArticle.set(article)
     respondView()
@@ -46,7 +46,7 @@ class ArticlesNew extends AppAction {
 
 @POST("articles")
 class ArticlesCreate extends AppAction {
-  def execute() {
+  def execute(): Unit = {
     val title   = param("title")
     val content = param("content")
     val article = Article(title = title, content = content)
@@ -65,7 +65,7 @@ class ArticlesCreate extends AppAction {
 
 @GET("articles/:id/edit")
 class ArticlesEdit extends AppAction {
-  def execute() {
+  def execute(): Unit = {
     val id = param[Int]("id")
     Article.find(id) match {
       case Some(article) =>
@@ -80,7 +80,7 @@ class ArticlesEdit extends AppAction {
 
 @PATCH("articles/:id")
 class ArticlesUpdate extends AppAction {
-  def execute() {
+  def execute(): Unit = {
     val id      = param[Int]("id")
     val title   = param("title")
     val content = param("content")
@@ -100,7 +100,7 @@ class ArticlesUpdate extends AppAction {
 
 @DELETE("articles/:id")
 class ArticlesDestroy extends AppAction {
-  def execute() {
+  def execute(): Unit = {
     val id = param[Int]("id")
     if (id == 1) {
       flash("This article is for demo, can't be deleted")
@@ -117,7 +117,7 @@ class ArticlesDestroy extends AppAction {
 
 case class Article(id: Int = 0, title: String = "", content: String = "") {
   // Returns Some(error message) or None
-  def validationMessage =
+  def validationMessage: Option[String] =
     Required.message("Title",   title) orElse
     Required.message("Content", content)
 }

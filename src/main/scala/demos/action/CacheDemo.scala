@@ -9,7 +9,7 @@ class ActionCacheDemo extends AppAction {
     log.info("Filter is run")
   }
 
-  def execute() {
+  def execute(): Unit = {
     respondInlineView(
       <ul>
         <li>
@@ -30,7 +30,7 @@ class PageCacheDemo extends AppAction {
     log.info("Filter is run")
   }
 
-  def execute() {
+  def execute(): Unit = {
     respondInlineView(
       <ul>
         <li>

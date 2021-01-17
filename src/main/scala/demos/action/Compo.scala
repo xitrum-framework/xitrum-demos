@@ -3,22 +3,24 @@ package demos.action
 import xitrum.Component
 import xitrum.annotation.GET
 
+import scala.xml.Node
+
 @GET("compo")
 class CompoMain extends AppAction {
-  def execute() {
+  def execute(): Unit = {
     // In the view template, CompoWithView and CompoWithoutView will be displayed
     respondView()
   }
 }
 
 class CompoWithView extends Component {
-  def render() = {
+  def render(): String = {
     renderView()
   }
 }
 
 class CompoWithoutView extends Component {
-  def render() = {
+  def render(): Node = {
     <xml:group>
       <p>Params:</p>
       <pre><code>{textParams}</code></pre>
@@ -27,7 +29,7 @@ class CompoWithoutView extends Component {
 }
 
 class CompoNested extends Component {
-  def render() = {
+  def render(): Node = {
     val compo1 = newComponent[CompoWithView]()
     val compo2 = newComponent[CompoWithoutView]()
     <xml:group>

@@ -7,7 +7,7 @@ import xitrum.annotation.GET
 
 @GET("actor")
 class ActorActionDemo extends ActorAction with AppAction {
-  def execute() {
+  def execute(): Unit = {
     // See Akka doc about scheduler
     context.system.scheduler.scheduleOnce(3.seconds, self, System.currentTimeMillis)
 

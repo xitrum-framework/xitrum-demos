@@ -8,25 +8,25 @@ import xitrum.annotation.{GET, SOCKJS, WEBSOCKET}
 
 @GET("sockJsChatDemo")
 class SockJsChat extends AppAction {
-  def execute() {
+  def execute(): Unit = {
     respondView()
   }
 }
 
 @GET("websocketChatDemo")
 class WebSocketChat extends AppAction {
-  def execute() {
+  def execute(): Unit = {
     respondView()
   }
 }
 
 @SOCKJS("sockJsChat")
 class SockJsChatActor extends SockJsAction with LookupOrCreateChatRoom {
-  def execute() {
+  def execute(): Unit = {
     joinChatRoom()
   }
 
-  def onJoinChatRoom(chatRoom: ActorRef) = {
+  def onJoinChatRoom(chatRoom: ActorRef): Receive = {
     case SockJsText(msg) =>
       chatRoom ! ChatRoom.Msg(msg)
 
@@ -37,11 +37,11 @@ class SockJsChatActor extends SockJsAction with LookupOrCreateChatRoom {
 
 @WEBSOCKET("websocketChat")
 class WebSocketChatActor extends WebSocketAction with LookupOrCreateChatRoom {
-  def execute() {
+  def execute(): Unit = {
     joinChatRoom()
   }
 
-  def onJoinChatRoom(chatRoom: ActorRef) = {
+  def onJoinChatRoom(chatRoom: ActorRef): Receive = {
     case WebSocketText(msg) =>
       chatRoom ! ChatRoom.Msg(msg)
 
@@ -71,7 +71,7 @@ object ChatRoom {
   // Registry is used for looking up chat room actor by name.
   // For simplicity, this demo uses only one chat room (lobby chat room).
   // If you want many chat rooms, create more chat rooms with different names.
-  val registry = Registry.start(Config.actorSystem, PROXY_NAME)
+  val registry: ActorRef = Registry.start(Config.actorSystem, PROXY_NAME)
 }
 
 /** Subclasses should implement onJoinChatRoom and call joinChatRoom. */
@@ -82,8 +82,8 @@ trait LookupOrCreateChatRoom {
 
   def onJoinChatRoom(chatRoom: ActorRef): Actor.Receive
 
-  def joinChatRoom() {
-    registry ! Registry.Register(ROOM_NAME, Props[ChatRoom])
+  def joinChatRoom(): Unit = {
+    registry ! Registry.Register(ROOM_NAME, Props[ChatRoom]())
     context.become(waitForRegisterResult)
   }
 
@@ -101,10 +101,10 @@ class ChatRoom extends Actor with Log {
   private var subscribers = Seq.empty[ActorRef]
   private var msgs        = Seq.empty[String]
 
-  def receive = {
+  def receive: Receive = {
     case Join =>
-      val subscriber = sender
-      subscribers = subscribers :+ sender
+      val subscriber = sender()
+      subscribers = subscribers :+ subscriber
       context.watch(subscriber)
       msgs foreach (subscriber ! Msg(_))
       log.debug("Joined chat room: " + subscriber)

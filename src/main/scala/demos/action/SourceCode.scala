@@ -14,8 +14,8 @@ object SourceCode {
     ret
   }
 
-  def getSourceFileName(className: String) = {
-    cache.get(className) match {
+  def getSourceFileName(className: String): String = {
+    cache.getAs[String](className) match {
       case Some(fileName) =>
         fileName
 
@@ -28,7 +28,7 @@ object SourceCode {
     }
   }
 
-  def getFileContent(path: String) = {
+  def getFileContent(path: String): String = {
     cache.get(path) match {
       case Some(content) =>
         content.toString

@@ -9,7 +9,7 @@ case class MyClass(x: Int, y: Int)
 @GET("json")
 @POST("json/:demo")
 class JsonPost extends AppAction {
-  def execute() {
+  def execute(): Unit = {
     if (request.method == HttpMethod.POST) {
       param("demo") match {
         case "1" =>

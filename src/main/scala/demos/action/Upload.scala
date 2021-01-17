@@ -5,14 +5,14 @@ import xitrum.annotation.{GET, POST}
 
 @GET("upload")
 class Upload extends AppAction {
-  def execute() {
+  def execute(): Unit = {
     respondView()
   }
 }
 
 @POST("upload")
 class DoUpload extends AppAction {
-  def execute() {
+  def execute(): Unit = {
     paramo[FileUpload]("file") match {
       case Some(file) =>
         flash("Uploaded " + file)

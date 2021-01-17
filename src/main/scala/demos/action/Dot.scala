@@ -4,7 +4,7 @@ import xitrum.annotation.GET
 
 @GET("articles/:id<[0-9]+>.:format")
 class ArticlesDotShow extends AppAction {
-  def execute() {
+  def execute(): Unit = {
     val id     = param[Int]("id")
     val format = param("format")
     respondInlineView(
